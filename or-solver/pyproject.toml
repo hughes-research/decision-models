@@ -1,0 +1,16 @@
+[project]
+name = "orsolver"
+version = "0.1.0"
+description = "OR-solver Tetris controller: rolling-horizon search over the 7-bag with hard constraints"
+requires-python = ">=3.12,<3.14"
+dependencies = ["fastapi>=0.115", "uvicorn>=0.30"]
+
+[project.optional-dependencies]
+cpsat = ["ortools>=9.12"]
+
+[dependency-groups]
+dev = ["pytest>=8"]
+
+[tool.pytest.ini_options]
+pythonpath = ["."]
+testpaths = ["tests"]

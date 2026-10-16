@@ -13,8 +13,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Clef vs Clef-flash",
-  description: "Two decision models race at Tetris",
+  title: "Tetris controller race",
+  description: "Decision model vs heuristic vs OR solver at hard-mode Tetris",
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {

@@ -1,0 +1,12 @@
+g 8 seed  1 model:clef-flash           TOPPED OUT 88s score    700 pieces   42 lines   7 lvl 1 T-spins 0 Tetrises 0 late 1 missed 0 think 1590ms
+g 8 seed  1 model:clef                 survived     score    400 pieces   19 lines   4 lvl 1 T-spins 0 Tetrises 0 late 4 missed 0 think 8523ms
+g 8 seed  2 model:clef-flash           TOPPED OUT 74s score    200 pieces   31 lines   2 lvl 1 T-spins 0 Tetrises 0 late 1 missed 1 think 1940ms
+g 8 seed  2 model:clef                 survived     score    800 pieces   28 lines   7 lvl 1 T-spins 0 Tetrises 0 late 0 missed 0 think 5808ms
+g 8 seed  3 model:clef-flash           TOPPED OUT 87s score    400 pieces   38 lines   4 lvl 1 T-spins 0 Tetrises 0 late 0 missed 0 think 1756ms
+g 8 seed  3 model:clef                 survived     score    500 pieces   28 lines   5 lvl 1 T-spins 0 Tetrises 0 late 0 missed 0 think 5836ms
+g 5 seed  1 model:clef-flash           TOPPED OUT 64s score    300 pieces   29 lines   3 lvl 1 T-spins 0 Tetrises 0 late 1 missed 0 think 1734ms
+g 5 seed  1 model:clef                 survived     score    900 pieces   29 lines   8 lvl 1 T-spins 0 Tetrises 0 late 0 missed 0 think 5718ms
+g 5 seed  2 model:clef-flash           TOPPED OUT 99s score   1100 pieces   44 lines  10 lvl 2 T-spins 0 Tetrises 0 late 2 missed 0 think 1757ms
+g 5 seed  2 model:clef                 survived     score   1000 pieces   29 lines   9 lvl 1 T-spins 0 Tetrises 0 late 0 missed 0 think 5708ms
+g 5 seed  3 model:clef-flash           TOPPED OUT 85s score    700 pieces   37 lines   7 lvl 1 T-spins 0 Tetrises 0 late 1 missed 0 think 1739ms
+g 5 seed  3 model:clef                 survived     score    500 pieces   28 lines   5 lvl 1 T-spins 0 Tetrises 0 late 1 missed 0 think 5849ms

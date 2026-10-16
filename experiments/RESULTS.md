@@ -184,3 +184,93 @@ node --no-warnings scripts/offline.ts clef-flash 0.015 0.02 0.025 0.03 1
 node --no-warnings scripts/live.ts clef-flash 50 3 off lookahead@1 entropy-gate@1
 npm test
 ```
+
+---
+
+# Part 2: three kinds of controller at hard-mode Tetris
+
+**Question:** under real pressure, how do a decision model (clef / clef-flash), the best heuristics and a purpose-built operations-research (OR) solver compare?
+
+**Short answer:**
+- **The OR solver wins whenever the game is hard, and it isn't close.** Under garbage every 5 pieces it survived 3 minutes in 6 of 8 games; the best heuristic survived none.
+- **When the game is easy, speed wins on score.** At garbage every 8 pieces everything strong survives, and the instant heuristic places more pieces and scores more.
+- **The decision models are out of their depth under real-time gravity.** clef-flash topped out in every game at about 83s with under 1,000 points.
+
+## What changed in the game
+
+- **Real-time gravity.** The piece keeps falling while its controller thinks. If it lands, it locks after a 500ms lock delay wherever it is.
+- **SRS rotation with wall kicks.** That adds **tucks** (last-second slides under an overhang) and **T-spins**, scored by guideline points. Both are a per-board "advanced moves" switch.
+- **Rising garbage.** Every N pieces a row with one gap pushes the stack up, the same rows on every board.
+- **Speed levels.** Gravity follows the guideline curve and speeds up every 10 lines.
+
+Decisions play out visibly, one move at a time (80ms per move, soft drops 20ms per row), and gravity keeps running while they do.
+
+## The OR solver (`or-solver/`, Python, port 8100)
+
+It uses rolling-horizon planning: plan 5–6 pieces ahead, play only the first placement, then re-plan.
+
+- **Root moves:** every lock reachable now, including tucks and spins.
+- **Hard constraints:** no new sealed holes, a height cap, and a clear spawn area, loosened in that order only when nothing passes.
+- **Scoring:** placements are scored with Dellacherie's evaluator plus spin and Tetris bonuses while the stack is safe. A plan scores the sum of its placements.
+- **Search:**
+  1. An exact stage over the current and next piece. On its own this equals the lookahead heuristic.
+  2. The bag knowledge: the pieces left in the current 7-bag are known, their order isn't. Orders are enumerated when few, otherwise sampled.
+  3. A beam search per scenario, with successive halving under a time limit.
+- **Timing:** the limit is scaled to the fall time, so it thinks less at high gravity.
+- **One set of rules:** they live in the TypeScript engine and are exported to Python (`scripts/fixtures.ts`). 257 parity tests check that both engines agree.
+
+## Results (`scripts/race.ts`; 3 minutes; seeds 1–8, models seeds 1–3; latency measured for real)
+
+**Survival** and mean time survived (3 minutes = survived):
+
+| Garbage every | OR solver + advanced | OR solver | OR + advanced, no bag info | Lookahead | Dellacherie | Well-keeper | clef-flash | clef* |
+|---|---|---|---|---|---|---|---|---|
+| 8 pieces | 8/8 | 8/8 | 8/8 | 8/8 | 2/8 · 149s | 0/8 · 113s | 0/3 · 83s | 3/3 |
+| 5 pieces | **6/8 · 179s** | 2/8 · 165s | 4/8 · 175s | 0/8 · 134s | 0/8 · 86s | 0/8 · 55s | 0/3 · 83s | 3/3 |
+| 3 pieces | **97s** | 87s | 80s | 59s | 40s | 32s | — | — |
+
+**Mean score:**
+
+| Garbage every | OR solver + advanced | OR solver | OR + advanced, no bag info | Lookahead | Dellacherie | Well-keeper | clef-flash | clef* |
+|---|---|---|---|---|---|---|---|---|
+| 8 pieces | 87,925 | 92,850 | 95,963 | **121,625** | 88,925 | 54,363 | 433 | 567 |
+| 5 pieces | **123,238** | 100,688 | 109,775 | 81,138 | 33,550 | 12,925 | 700 | 800 |
+| 3 pieces | **45,675** | 35,725 | 28,650 | 19,975 | 7,025 | 4,063 | — | — |
+
+**Paired survival difference against lookahead** (95% bootstrap CI over seeds):
+
+| Garbage every | OR solver + advanced | OR solver | OR + advanced, no bag info |
+|---|---|---|---|
+| 5 pieces | **+44s [33, 58]** | +31s [6, 52] | +40s [25, 58] |
+| 3 pieces | **+38s [27, 52]** | +28s [10, 46] | +21s [1, 41] |
+
+T-spins per game for OR solver + advanced: 3.0 at garbage 8, 2.9 at garbage 5, 1.8 at garbage 3. The heuristics, which can't plan spins, made none.
+
+\* clef "survives" only because it is slow. It places about 26 pieces in 3 minutes (about 6s per move), and garbage comes per piece placed, so it faces only 3–5 garbage rows. Its score shows how it really played. This is also why the page ranks the podium by score, not survival.
+
+## What it shows
+
+1. **Under pressure the OR solver dominates.** At garbage every 5 and every 3 it outlives the best heuristic by 38–44s, with confidence intervals well clear of zero. It scores 1.5–2.3× more, and is the only controller that survives at garbage every 5.
+2. **Each part of the solver earns its place**, comparing variants against the full solver at garbage every 5:
+   - **Advanced moves (tucks and spins):** survival goes from 2/8 to 6/8, worth 2.9 T-spins per game.
+   - **Bag knowledge:** survival goes from 4/8 without it to 6/8 with it; at garbage every 3, 80s without it against 97s.
+3. **Speed matters when nothing else does.** At garbage every 8 every strong controller survives. Lookahead decides in about 5ms against the solver's 80–140ms, so it places more pieces, reaches higher levels and scores about 30% more. The OR edge appears only when the planning is needed.
+4. **Decision models can't keep up with real time.** clef-flash takes about 1.8s per move, so its pieces fall while it thinks, and it digs holes when they land. It topped out at about 83s in every game with under 1,000 points: two orders of magnitude below the solver.
+5. **The original heuristics (well-keeper, danger-adaptive) collapse under garbage.** Saving rows for Tetrises is the wrong bet when the floor keeps rising. Plain Dellacherie also falls well short of lookahead.
+6. **A cost of acting slowly that's easy to miss.** At high levels, gravity (7–18ms per row) outruns 80ms moves. Even a decision made in time can run out of lock delay mid-move, shown as `missed` (2.5–4.8 per game for the solver at garbage every 5). The 80ms move speed is a setting.
+
+## Reproduce
+
+```bash
+npm run solver                                  # OR solver on :8100 (or the "or-solver" launch config)
+node --no-warnings scripts/race.ts seeds=1-8 minutes=3 garbage=8,5,3 tag=hard solver:300+adv solver:300 solver:300+adv+strict heuristic:lookahead heuristic:dellacherie heuristic:well-keeper heuristic:danger-adaptive
+node --no-warnings scripts/race.ts seeds=1-3 minutes=3 garbage=8,5 tag=hard model:clef-flash model:clef
+node --no-warnings scripts/race-summary.ts tag=hard
+npm test && npm run test:solver
+```
+
+The results were produced after an adversarial review of the new code (4 reviewers, 2 skeptics per finding; 13 of 22 findings confirmed and fixed). Fixes that changed the solver:
+- on a deadline it now never compares moves searched to different depths;
+- it plans for garbage that lands right after the current piece;
+- a top-out always scores worse than surviving, including a blocked spawn;
+- small bag remainders are padded to a full set of scenarios.
