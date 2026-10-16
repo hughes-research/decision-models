@@ -1,0 +1,8 @@
+off                    pieces  50 lines   8 score   800 holes 25 height 17 assisted 0 overrides 0 1.6min
+lookahead@1            pieces  50 lines  19 score  2300 holes  0 height  4 assisted 50 overrides 24 1.5min
+entropy-gate@1         pieces  50 lines  18 score  2000 holes  0 height  4 assisted 50 overrides 29 1.4min
+poe-tuned@1            pieces  50 lines  19 score  2200 holes  0 height  2 assisted 50 overrides 28 1.5min
+move-distilled@1       pieces  50 lines  19 score  2000 holes  0 height  4 assisted 50 overrides 29 1.7min
+hole-guard@1           pieces  50 lines  18 score  1900 holes  0 height  4 assisted 50 overrides 14 1.5min
+clef-hole-sense@1      pieces  50 lines  19 score  2400 holes  0 height  2 assisted 50 overrides 28 1.5min
+lookahead@0.025        pieces  50 lines  16 score  1800 holes  4 height  6 assisted 29 overrides 23 1.4min

@@ -81,7 +81,7 @@ export function clearLines(b: Board): { board: Board; lines: number } {
   return { board: [...Array.from({ length: lines }, () => Array(W).fill(0)), ...kept], lines };
 }
 
-const colHeights = (b: Board) =>
+export const colHeights = (b: Board) =>
   Array.from({ length: W }, (_, x) => {
     const y = b.findIndex((row) => row[x] !== 0);
     return y === -1 ? 0 : H - y;

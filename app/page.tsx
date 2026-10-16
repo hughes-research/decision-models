@@ -5,18 +5,22 @@ import {
   emptyBoard, makeBag, mulberry32, placements, toOptions, toAscii, LINE_SCORE, W, ROTATIONS, PIECE_ID,
   type Board as BoardT, type PieceName, type Placement,
 } from "@/lib/tetris";
+import { METHODS, byId, choose, type Kind } from "@/lib/heuristics";
 
 const MODELS = ["clef", "clef-flash"] as const;
 type Model = (typeof MODELS)[number];
+// Default assist gate per model, from the offline study: help on roughly the less-confident two-thirds of moves.
+const DEFAULT_GATE: Record<Model, number> = { clef: 0.1, "clef-flash": 0.025 };
 
 const COLORS = ["", "bg-cyan-400", "bg-yellow-300", "bg-purple-500", "bg-green-500", "bg-red-500", "bg-orange-400", "bg-blue-500"];
 const SPIN_MS = 150, SLIDE_MS = 25, DROP_MS = 10;
+const KIND_LABEL: Record<Kind, string> = { classic: "Classic", original: "Original", learned: "Learned from the model", fusion: "Model + heuristic fusion" };
 
-type Last = { letter: string; text: string; confidence: number; ms: number; top: [string, number][] };
+type Last = { letter: string; text: string; confidence: number; ms: number; top: [string, number][]; assist?: string };
 type Game = {
   bag: () => PieceName; rng: () => number;
-  board: BoardT; piece: PieceName;
-  score: number; lines: number; pieces: number; ms: number[];
+  board: BoardT; piece: PieceName; next: PieceName;
+  score: number; lines: number; pieces: number; ms: number[]; assists: number; overrides: number;
   last?: Last; over: boolean; error?: string;
 };
 type Ghost = { piece: PieceName; rot: number; x: number; y: number; thinking: boolean };
@@ -24,7 +28,8 @@ export type Status = { score: number; lines: number; pieces: number; over: boole
 
 function newGame(seed: number): Game {
   const bag = makeBag(seed);
-  return { bag, rng: mulberry32(seed ^ 0x9e3779b9), board: emptyBoard(), piece: bag(), score: 0, lines: 0, pieces: 0, ms: [], over: false };
+  const piece = bag(), next = bag();
+  return { bag, rng: mulberry32(seed ^ 0x9e3779b9), board: emptyBoard(), piece, next, score: 0, lines: 0, pieces: 0, ms: [], assists: 0, overrides: 0, over: false };
 }
 
 const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
@@ -32,13 +37,21 @@ const width = (piece: PieceName, rot: number) => Math.max(...ROTATIONS[piece][ro
 const spawnX = (piece: PieceName, rot: number) => Math.floor((W - width(piece, rot)) / 2);
 
 // Remounted (via key) on seed change or reset, so it never needs to reset itself.
-function Player({ model, seed, running, onStatus }: {
+type Assist = { method: string; gate: number };
+
+function Player({ model, seed, running, onStatus, assist, onAssist }: {
   model: Model; seed: number; running: boolean; onStatus: (m: Model, s: Status) => void;
+  assist: Assist; onAssist: (m: Model, a: Assist) => void; // lives in the page so a reset keeps the choice
 }) {
   const [view, setView] = useState(() => newGame(seed)); // render snapshot, lags the game while a drop animates
   const [ghost, setGhost] = useState<Ghost | null>(null);
   const game = useRef({ ...view, ms: [] as number[] }); // mutable game, only touched by the loop below
   const anim = useRef(Promise.resolve()); // animations run in order, off the decision path
+  const { method, gate } = assist;
+  const setMethod = (m: string) => onAssist(model, { method: m, gate });
+  const setGate = (g: number) => onAssist(model, { method, gate: g });
+  const helper = useRef(assist); // read by the running loop, so changes apply on the next move
+  useEffect(() => { helper.current = assist; }, [assist]);
 
   const show = useCallback((snap: Game) => {
     setView(snap);
@@ -85,11 +98,21 @@ function Player({ model, seed, running, onStatus }: {
             const d = await res.json();
             if (!res.ok) throw new Error(d.error ?? res.statusText);
             if (cancelled) return; // paused mid-request: re-ask this piece on resume
-            const chosen = opts.find((o) => o.letter === d.letter) ?? opts[0];
+            const probs = opts.map((o) => (d.probabilities as Record<string, number>)[o.letter] ?? 0);
+            let chosen = opts.find((o) => o.letter === d.letter) ?? opts[0];
+            const { method: hm, gate: hg } = helper.current;
+            let assist: string | undefined;
+            if (hm !== "off" && d.confidence < hg) {
+              g.assists++;
+              const h = opts[choose(hm, { prev: g.board, piece, next: g.next, options: opts, probs })];
+              if (h.letter !== chosen.letter) { g.overrides++; assist = `${byId(hm).name} overrode ${chosen.letter} → ${h.letter}`; }
+              else assist = `${byId(hm).name} agreed with ${chosen.letter}`;
+              chosen = h;
+            }
             pick = chosen;
             g.ms.push(d.ms);
             g.last = {
-              letter: chosen.letter, text: chosen.text, confidence: d.confidence, ms: d.ms,
+              letter: chosen.letter, text: chosen.text, confidence: d.confidence, ms: d.ms, assist,
               top: Object.entries(d.probabilities as Record<string, number>).sort((a, b) => b[1] - a[1]).slice(0, 3)
                 .map(([l, p]) => [`${l}: ${opts.find((o) => o.letter === l)?.text ?? "?"}`, p]),
             };
@@ -104,7 +127,8 @@ function Player({ model, seed, running, onStatus }: {
         g.lines += pick.lines;
         g.score += LINE_SCORE[pick.lines];
         g.pieces++;
-        g.piece = g.bag();
+        g.piece = g.next;
+        g.next = g.bag();
         const snap = snapshot(g);
         const target = pick;
 
@@ -152,6 +176,25 @@ function Player({ model, seed, running, onStatus }: {
         <h2 className="font-mono text-xl font-bold">{model}</h2>
         <span className="font-mono text-sm text-zinc-400">{ghost?.thinking ? "thinking…" : `piece: ${v.piece}`}</span>
       </div>
+      <div className="flex flex-col gap-1 font-mono text-xs">
+        <div className="flex items-center gap-2">
+          <label htmlFor={`${model}-assist`} className="text-zinc-400">assist</label>
+          <select id={`${model}-assist`} value={method} onChange={(e) => setMethod(e.target.value)}
+            className="min-w-0 flex-1 rounded bg-zinc-900 px-2 py-1 text-zinc-100">
+            <option value="off">Off: model only</option>
+            {(Object.keys(KIND_LABEL) as Kind[]).map((k) => (
+              <optgroup key={k} label={KIND_LABEL[k]}>
+                {METHODS.filter((m) => m.kind === k).map((m) => <option key={m.id} value={m.id}>{m.name}</option>)}
+              </optgroup>
+            ))}
+          </select>
+          <label htmlFor={`${model}-gate`} className="text-zinc-400" title="The method steps in when the model's confidence is below this. 1 = every move.">conf &lt;</label>
+          <input id={`${model}-gate`} type="number" step={0.005} min={0} max={1} value={gate} disabled={method === "off"}
+            onChange={(e) => setGate(Math.min(1, Math.max(0, Number(e.target.value) || 0)))}
+            className="w-16 rounded bg-zinc-900 px-2 py-1 disabled:opacity-40" />
+        </div>
+        <p className="min-h-8 text-zinc-500">{method === "off" ? "The model decides every move on its own." : byId(method).blurb}</p>
+      </div>
       <div className="relative">
         <div className="grid gap-px bg-zinc-800 p-px rounded" style={{ gridTemplateColumns: `repeat(${W}, 1fr)` }}>
           {v.board.flat().map((c, i) => (
@@ -162,8 +205,8 @@ function Player({ model, seed, running, onStatus }: {
           <div className="absolute inset-0 grid place-items-center bg-black/70 font-mono text-2xl font-bold text-red-400">TOPPED OUT</div>
         )}
       </div>
-      <dl className="grid grid-cols-4 gap-2 font-mono text-center">
-        {[["score", v.score], ["lines", v.lines], ["pieces", v.pieces], ["avg ms", Math.round(avg)]].map(([k, v]) => (
+      <dl className="grid grid-cols-5 gap-2 font-mono text-center">
+        {[["score", v.score], ["lines", v.lines], ["pieces", v.pieces], ["avg ms", Math.round(avg)], ["assists", `${v.overrides}/${v.assists}`]].map(([k, v]) => (
           <div key={k} className="rounded bg-zinc-900 py-1">
             <dt className="text-[10px] uppercase text-zinc-500">{k}</dt>
             <dd className="text-lg">{v}</dd>
@@ -181,6 +224,9 @@ function Player({ model, seed, running, onStatus }: {
                 {(p * 100).toFixed(0).padStart(3)}% {t}
               </p>
             ))}
+            {v.last.assist && (
+              <p className="text-amber-400">{v.last.assist}{v.last.top.some(([t]) => t.startsWith(v.last!.letter + ":")) ? "" : `: ${v.last.letter}: ${v.last.text}`}</p>
+            )}
           </>
         ) : (
           <p className="text-zinc-500">waiting…</p>
@@ -199,6 +245,10 @@ export default function Home() {
   const [status, setStatus] = useState<Partial<Record<Model, Status>>>({});
 
   const onStatus = useCallback((m: Model, s: Status) => setStatus((prev) => ({ ...prev, [m]: s })), []);
+  const [assist, setAssist] = useState<Record<Model, Assist>>(() => ({
+    clef: { method: "off", gate: DEFAULT_GATE.clef }, "clef-flash": { method: "off", gate: DEFAULT_GATE["clef-flash"] },
+  }));
+  const onAssist = useCallback((m: Model, a: Assist) => setAssist((prev) => ({ ...prev, [m]: a })), []);
   const allOver = MODELS.every((m) => status[m]?.over);
   const finished = remaining <= 0 || allOver;
   const active = running && !finished;
@@ -248,13 +298,13 @@ export default function Home() {
         <label className="flex items-center gap-2">
           seed
           <input type="number" value={seed} disabled={active}
-            onChange={(e) => { setSeed(Number(e.target.value) || 0); setStatus({}); setRemaining(minutes * 60_000); }}
+            onChange={(e) => { setRunning(false); setSeed(Number(e.target.value) || 0); setStatus({}); setRemaining(minutes * 60_000); }}
             className="w-20 rounded bg-zinc-900 px-2 py-1" />
         </label>
         <label className="flex items-center gap-2">
           minutes
           <input type="number" min={1} value={minutes} disabled={active}
-            onChange={(e) => { const m = Math.max(1, Number(e.target.value) || 1); setMinutes(m); setRemaining(m * 60_000); }}
+            onChange={(e) => { const m = Math.max(1, Number(e.target.value) || 1); setRunning(false); setMinutes(m); setRemaining(m * 60_000); }}
             className="w-16 rounded bg-zinc-900 px-2 py-1" />
         </label>
         <span className="text-2xl tabular-nums">{Math.floor(secs / 60)}:{String(secs % 60).padStart(2, "0")}</span>
@@ -268,7 +318,7 @@ export default function Home() {
 
       <div className="flex w-full flex-wrap justify-center gap-8">
         {MODELS.map((m) => (
-          <Player key={`${m}-${seed}-${runId}`} model={m} seed={seed} running={active} onStatus={onStatus} />
+          <Player key={`${m}-${seed}-${runId}`} model={m} seed={seed} running={active} onStatus={onStatus} assist={assist[m]} onAssist={onAssist} />
         ))}
       </div>
     </main>

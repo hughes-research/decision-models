@@ -1,0 +1,31 @@
+health 1/150 score 0.74 1487ms
+health 11/150 score 1.26 1306ms
+health 21/150 score 1.90 1297ms
+health 31/150 score 1.78 1313ms
+health 41/150 score 0.87 1798ms
+health 51/150 score 1.75 1323ms
+health 61/150 score 1.75 1503ms
+health 71/150 score 2.10 1300ms
+health 81/150 score 1.55 1476ms
+health 91/150 score 1.05 1805ms
+health 101/150 score 1.41 1480ms
+health 111/150 score 1.61 1416ms
+health 121/150 score 1.13 1545ms
+health 131/150 score 1.67 1355ms
+health 141/150 score 1.56 1571ms
+moves clef-flash 1/100 conf 0.024 2542ms
+moves clef-flash 11/100 conf 0.025 1690ms
+moves clef-flash 21/100 conf 0.009 1714ms
+moves clef-flash 31/100 conf 0.020 1630ms
+moves clef-flash 41/100 conf 0.018 1009ms
+moves clef-flash 51/100 conf 0.014 2305ms
+moves clef-flash 61/100 conf 0.014 2353ms
+moves clef-flash 71/100 conf 0.029 1247ms
+moves clef-flash 81/100 conf 0.016 2549ms
+moves clef-flash 91/100 conf 0.031 1036ms
+moves clef 1/50 conf 0.124 7276ms
+moves clef 11/50 conf 0.077 7045ms
+moves clef 21/50 conf 0.076 3013ms
+moves clef 31/50 conf 0.071 7603ms
+moves clef 41/50 conf 0.046 3362ms
+collect done

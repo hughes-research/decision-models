@@ -1,0 +1,662 @@
+{
+  "model": "clef",
+  "n": 50,
+  "gates": [
+    0.05,
+    0.07,
+    0.1,
+    1
+  ],
+  "results": {
+    "model-only": {
+      "all": {
+        "regret": 9.71816666666666,
+        "best": 0.38,
+        "blunders": 0.3,
+        "assisted": 0
+      }
+    },
+    "lee4": {
+      "1": {
+        "regret": 10.219999999999994,
+        "best": 0.36,
+        "blunders": 0.18,
+        "assisted": 1
+      },
+      "0.05": {
+        "regret": 9.036499999999995,
+        "best": 0.38,
+        "blunders": 0.28,
+        "assisted": 0.08
+      },
+      "0.07": {
+        "regret": 8.988333333333326,
+        "best": 0.36,
+        "blunders": 0.26,
+        "assisted": 0.3
+      },
+      "0.1": {
+        "regret": 9.103833333333327,
+        "best": 0.34,
+        "blunders": 0.22,
+        "assisted": 0.68
+      }
+    },
+    "dellacherie": {
+      "1": {
+        "regret": 8.531833333333324,
+        "best": 0.4,
+        "blunders": 0.1,
+        "assisted": 1
+      },
+      "0.05": {
+        "regret": 8.693333333333328,
+        "best": 0.42,
+        "blunders": 0.26,
+        "assisted": 0.08
+      },
+      "0.07": {
+        "regret": 9.497499999999992,
+        "best": 0.36,
+        "blunders": 0.22,
+        "assisted": 0.3
+      },
+      "0.1": {
+        "regret": 8.418999999999992,
+        "best": 0.38,
+        "blunders": 0.18,
+        "assisted": 0.68
+      }
+    },
+    "holes-first": {
+      "1": {
+        "regret": 10.393666666666661,
+        "best": 0.4,
+        "blunders": 0,
+        "assisted": 1
+      },
+      "0.05": {
+        "regret": 9.204999999999995,
+        "best": 0.38,
+        "blunders": 0.26,
+        "assisted": 0.08
+      },
+      "0.07": {
+        "regret": 9.385333333333325,
+        "best": 0.38,
+        "blunders": 0.18,
+        "assisted": 0.3
+      },
+      "0.1": {
+        "regret": 9.60066666666666,
+        "best": 0.38,
+        "blunders": 0.08,
+        "assisted": 0.68
+      }
+    },
+    "transitions": {
+      "1": {
+        "regret": 10.07383333333333,
+        "best": 0.34,
+        "blunders": 0.06,
+        "assisted": 1
+      },
+      "0.05": {
+        "regret": 8.462166666666663,
+        "best": 0.4,
+        "blunders": 0.26,
+        "assisted": 0.08
+      },
+      "0.07": {
+        "regret": 9.519333333333325,
+        "best": 0.32,
+        "blunders": 0.22,
+        "assisted": 0.3
+      },
+      "0.1": {
+        "regret": 9.794333333333325,
+        "best": 0.34,
+        "blunders": 0.14,
+        "assisted": 0.68
+      }
+    },
+    "lookahead": {
+      "1": {
+        "regret": 7.002333333333326,
+        "best": 0.42,
+        "blunders": 0.14,
+        "assisted": 1
+      },
+      "0.05": {
+        "regret": 8.693333333333328,
+        "best": 0.42,
+        "blunders": 0.26,
+        "assisted": 0.08
+      },
+      "0.07": {
+        "regret": 8.594999999999992,
+        "best": 0.38,
+        "blunders": 0.26,
+        "assisted": 0.3
+      },
+      "0.1": {
+        "regret": 7.723833333333326,
+        "best": 0.38,
+        "blunders": 0.2,
+        "assisted": 0.68
+      }
+    },
+    "well-keeper": {
+      "1": {
+        "regret": 9.196833333333323,
+        "best": 0.4,
+        "blunders": 0.06,
+        "assisted": 1
+      },
+      "0.05": {
+        "regret": 8.693333333333328,
+        "best": 0.42,
+        "blunders": 0.26,
+        "assisted": 0.08
+      },
+      "0.07": {
+        "regret": 9.931833333333323,
+        "best": 0.36,
+        "blunders": 0.2,
+        "assisted": 0.3
+      },
+      "0.1": {
+        "regret": 9.257666666666656,
+        "best": 0.38,
+        "blunders": 0.14,
+        "assisted": 0.68
+      }
+    },
+    "danger-adaptive": {
+      "1": {
+        "regret": 8.903166666666658,
+        "best": 0.44,
+        "blunders": 0.08,
+        "assisted": 1
+      },
+      "0.05": {
+        "regret": 9.193166666666661,
+        "best": 0.4,
+        "blunders": 0.26,
+        "assisted": 0.08
+      },
+      "0.07": {
+        "regret": 9.124666666666657,
+        "best": 0.38,
+        "blunders": 0.22,
+        "assisted": 0.3
+      },
+      "0.1": {
+        "regret": 8.845333333333324,
+        "best": 0.4,
+        "blunders": 0.16,
+        "assisted": 0.68
+      }
+    },
+    "contour": {
+      "1": {
+        "regret": 9.529999999999994,
+        "best": 0.34,
+        "blunders": 0.16,
+        "assisted": 1
+      },
+      "0.05": {
+        "regret": 9.279499999999993,
+        "best": 0.38,
+        "blunders": 0.28,
+        "assisted": 0.08
+      },
+      "0.07": {
+        "regret": 9.276999999999992,
+        "best": 0.34,
+        "blunders": 0.26,
+        "assisted": 0.3
+      },
+      "0.1": {
+        "regret": 9.472166666666658,
+        "best": 0.3,
+        "blunders": 0.24,
+        "assisted": 0.68
+      }
+    },
+    "rollout": {
+      "1": {
+        "regret": 7.402666666666659,
+        "best": 0.34,
+        "blunders": 0.26,
+        "assisted": 1
+      },
+      "0.05": {
+        "regret": 8.39616666666666,
+        "best": 0.38,
+        "blunders": 0.3,
+        "assisted": 0.08
+      },
+      "0.07": {
+        "regret": 10.085166666666659,
+        "best": 0.32,
+        "blunders": 0.28,
+        "assisted": 0.3
+      },
+      "0.1": {
+        "regret": 8.784999999999993,
+        "best": 0.32,
+        "blunders": 0.28,
+        "assisted": 0.68
+      }
+    },
+    "clef-distilled": {
+      "1": {
+        "regret": 25.748666666666665,
+        "best": 0.18,
+        "blunders": 0.62,
+        "assisted": 1
+      },
+      "0.05": {
+        "regret": 8.628166666666663,
+        "best": 0.4,
+        "blunders": 0.3,
+        "assisted": 0.08
+      },
+      "0.07": {
+        "regret": 14.013,
+        "best": 0.28,
+        "blunders": 0.4,
+        "assisted": 0.3
+      },
+      "0.1": {
+        "regret": 15.089333333333332,
+        "best": 0.24,
+        "blunders": 0.52,
+        "assisted": 0.68
+      }
+    },
+    "clef-hole-sense": {
+      "1": {
+        "regret": 8.91633333333333,
+        "best": 0.4,
+        "blunders": 0.16,
+        "assisted": 1
+      },
+      "0.05": {
+        "regret": 9.036499999999995,
+        "best": 0.38,
+        "blunders": 0.28,
+        "assisted": 0.08
+      },
+      "0.07": {
+        "regret": 8.81016666666666,
+        "best": 0.38,
+        "blunders": 0.24,
+        "assisted": 0.3
+      },
+      "0.1": {
+        "regret": 8.668166666666659,
+        "best": 0.38,
+        "blunders": 0.22,
+        "assisted": 0.68
+      }
+    },
+    "move-distilled": {
+      "1": {
+        "regret": 8.789499999999993,
+        "best": 0.34,
+        "blunders": 0.2,
+        "assisted": 1
+      },
+      "0.05": {
+        "regret": 9.02466666666666,
+        "best": 0.4,
+        "blunders": 0.28,
+        "assisted": 0.08
+      },
+      "0.07": {
+        "regret": 8.926333333333327,
+        "best": 0.36,
+        "blunders": 0.26,
+        "assisted": 0.3
+      },
+      "0.1": {
+        "regret": 8.585499999999989,
+        "best": 0.34,
+        "blunders": 0.28,
+        "assisted": 0.68
+      }
+    },
+    "poe": {
+      "1": {
+        "regret": 8.519333333333327,
+        "best": 0.42,
+        "blunders": 0.12,
+        "assisted": 1
+      },
+      "0.05": {
+        "regret": 8.693333333333328,
+        "best": 0.42,
+        "blunders": 0.26,
+        "assisted": 0.08
+      },
+      "0.07": {
+        "regret": 8.624833333333324,
+        "best": 0.4,
+        "blunders": 0.22,
+        "assisted": 0.3
+      },
+      "0.1": {
+        "regret": 8.529166666666658,
+        "best": 0.4,
+        "blunders": 0.18,
+        "assisted": 0.68
+      }
+    },
+    "entropy-gate": {
+      "1": {
+        "regret": 7.4316666666666595,
+        "best": 0.42,
+        "blunders": 0.12,
+        "assisted": 1
+      },
+      "0.05": {
+        "regret": 8.693333333333328,
+        "best": 0.42,
+        "blunders": 0.26,
+        "assisted": 0.08
+      },
+      "0.07": {
+        "regret": 8.594999999999992,
+        "best": 0.38,
+        "blunders": 0.26,
+        "assisted": 0.3
+      },
+      "0.1": {
+        "regret": 7.874166666666662,
+        "best": 0.38,
+        "blunders": 0.2,
+        "assisted": 0.68
+      }
+    },
+    "shortlist": {
+      "1": {
+        "regret": 7.403499999999995,
+        "best": 0.4,
+        "blunders": 0.14,
+        "assisted": 1
+      },
+      "0.05": {
+        "regret": 9.036499999999995,
+        "best": 0.38,
+        "blunders": 0.28,
+        "assisted": 0.08
+      },
+      "0.07": {
+        "regret": 8.545333333333327,
+        "best": 0.4,
+        "blunders": 0.24,
+        "assisted": 0.3
+      },
+      "0.1": {
+        "regret": 8.084333333333326,
+        "best": 0.4,
+        "blunders": 0.18,
+        "assisted": 0.68
+      }
+    },
+    "veto": {
+      "1": {
+        "regret": 9.036499999999995,
+        "best": 0.38,
+        "blunders": 0.28,
+        "assisted": 1
+      },
+      "0.05": {
+        "regret": 9.036499999999995,
+        "best": 0.38,
+        "blunders": 0.28,
+        "assisted": 0.08
+      },
+      "0.07": {
+        "regret": 9.036499999999995,
+        "best": 0.38,
+        "blunders": 0.28,
+        "assisted": 0.3
+      },
+      "0.1": {
+        "regret": 9.036499999999995,
+        "best": 0.38,
+        "blunders": 0.28,
+        "assisted": 0.68
+      }
+    },
+    "hole-guard": {
+      "1": {
+        "regret": 9.526999999999992,
+        "best": 0.36,
+        "blunders": 0,
+        "assisted": 1
+      },
+      "0.05": {
+        "regret": 8.462166666666663,
+        "best": 0.4,
+        "blunders": 0.26,
+        "assisted": 0.08
+      },
+      "0.07": {
+        "regret": 8.800333333333326,
+        "best": 0.38,
+        "blunders": 0.18,
+        "assisted": 0.3
+      },
+      "0.1": {
+        "regret": 8.894166666666658,
+        "best": 0.36,
+        "blunders": 0.08,
+        "assisted": 0.68
+      }
+    },
+    "poe-tuned": {
+      "1": {
+        "regret": 7.18866666666666,
+        "best": 0.42,
+        "blunders": 0.12,
+        "assisted": 1
+      },
+      "0.05": {
+        "regret": 8.450333333333328,
+        "best": 0.42,
+        "blunders": 0.26,
+        "assisted": 0.08
+      },
+      "0.07": {
+        "regret": 8.351999999999993,
+        "best": 0.38,
+        "blunders": 0.26,
+        "assisted": 0.3
+      },
+      "0.1": {
+        "regret": 7.631166666666662,
+        "best": 0.38,
+        "blunders": 0.2,
+        "assisted": 0.68
+      }
+    },
+    "perplexity-shortlist": {
+      "1": {
+        "regret": 7.002333333333326,
+        "best": 0.42,
+        "blunders": 0.14,
+        "assisted": 1
+      },
+      "0.05": {
+        "regret": 8.693333333333328,
+        "best": 0.42,
+        "blunders": 0.26,
+        "assisted": 0.08
+      },
+      "0.07": {
+        "regret": 8.594999999999992,
+        "best": 0.38,
+        "blunders": 0.26,
+        "assisted": 0.3
+      },
+      "0.1": {
+        "regret": 7.723833333333326,
+        "best": 0.38,
+        "blunders": 0.2,
+        "assisted": 0.68
+      }
+    },
+    "reliability-rank": {
+      "1": {
+        "regret": 7.782666666666658,
+        "best": 0.44,
+        "blunders": 0.12,
+        "assisted": 1
+      },
+      "0.05": {
+        "regret": 8.450333333333328,
+        "best": 0.42,
+        "blunders": 0.26,
+        "assisted": 0.08
+      },
+      "0.07": {
+        "regret": 8.001666666666658,
+        "best": 0.42,
+        "blunders": 0.24,
+        "assisted": 0.3
+      },
+      "0.1": {
+        "regret": 7.773499999999992,
+        "best": 0.42,
+        "blunders": 0.18,
+        "assisted": 0.68
+      }
+    },
+    "borda": {
+      "1": {
+        "regret": 9.037333333333327,
+        "best": 0.36,
+        "blunders": 0.08,
+        "assisted": 1
+      },
+      "0.05": {
+        "regret": 8.462166666666663,
+        "best": 0.4,
+        "blunders": 0.26,
+        "assisted": 0.08
+      },
+      "0.07": {
+        "regret": 8.439333333333327,
+        "best": 0.36,
+        "blunders": 0.22,
+        "assisted": 0.3
+      },
+      "0.1": {
+        "regret": 8.216333333333326,
+        "best": 0.36,
+        "blunders": 0.16,
+        "assisted": 0.68
+      }
+    },
+    "minimax-regret": {
+      "1": {
+        "regret": 8.826333333333325,
+        "best": 0.4,
+        "blunders": 0.08,
+        "assisted": 1
+      },
+      "0.05": {
+        "regret": 8.450333333333328,
+        "best": 0.42,
+        "blunders": 0.26,
+        "assisted": 0.08
+      },
+      "0.07": {
+        "regret": 8.402166666666657,
+        "best": 0.4,
+        "blunders": 0.24,
+        "assisted": 0.3
+      },
+      "0.1": {
+        "regret": 8.160999999999994,
+        "best": 0.4,
+        "blunders": 0.16,
+        "assisted": 0.68
+      }
+    }
+  },
+  "signal": {
+    "modelRho": 0.5098954522601581,
+    "lookaheadRho": 0.7274634099990136
+  },
+  "betaSearch": [
+    {
+      "beta": 0.25,
+      "regret": 8.241166666666663,
+      "best": 0.42,
+      "blunders": 0.24,
+      "assisted": 1
+    },
+    {
+      "beta": 0.5,
+      "regret": 7.397833333333331,
+      "best": 0.44,
+      "blunders": 0.2,
+      "assisted": 1
+    },
+    {
+      "beta": 1,
+      "regret": 8.035333333333327,
+      "best": 0.44,
+      "blunders": 0.16,
+      "assisted": 1
+    },
+    {
+      "beta": 2,
+      "regret": 7.391999999999992,
+      "best": 0.4,
+      "blunders": 0.12,
+      "assisted": 1
+    },
+    {
+      "beta": 3,
+      "regret": 6.922166666666659,
+      "best": 0.42,
+      "blunders": 0.12,
+      "assisted": 1
+    },
+    {
+      "beta": 5,
+      "regret": 7.18866666666666,
+      "best": 0.42,
+      "blunders": 0.12,
+      "assisted": 1
+    },
+    {
+      "beta": 8,
+      "regret": 7.18866666666666,
+      "best": 0.42,
+      "blunders": 0.12,
+      "assisted": 1
+    },
+    {
+      "beta": 13,
+      "regret": 7.327999999999992,
+      "best": 0.42,
+      "blunders": 0.14,
+      "assisted": 1
+    },
+    {
+      "beta": 21,
+      "regret": 7.15266666666666,
+      "best": 0.42,
+      "blunders": 0.14,
+      "assisted": 1
+    }
+  ],
+  "bestBeta": 3
+}
