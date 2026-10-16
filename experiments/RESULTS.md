@@ -189,6 +189,9 @@ npm test
 
 # Part 2: three kinds of controller at hard-mode Tetris (garbage per piece; superseded by Part 3)
 
+> **Correction from Part 3:** under fair time-based garbage, most of the OR solver's lead below disappears. The
+> per-piece rule rewarded thinking longer: fewer pieces placed per minute meant less garbage.
+>
 > These runs used the first garbage rule: one row every N pieces placed. That rule let slow controllers dodge garbage,
 > so it was replaced by time-based garbage (Part 3). The data is kept in `experiments/race-pieces.jsonl`. The current
 > code no longer reproduces it; commit a0b590c does.
@@ -279,3 +282,68 @@ The results were produced after an adversarial review of the new code (4 reviewe
 - it plans for garbage that lands right after the current piece;
 - a top-out always scores worse than surviving, including a blocked spawn;
 - small bag remainders are padded to a full set of scenarios.
+
+---
+
+# Part 3: the same race with fair, time-based garbage
+
+**Why it was rerun.** Under the per-piece rule, a slow controller placed fewer pieces per minute and so got less garbage per minute:
+- clef "survived" 3 minutes with about 26 pieces;
+- the solver, at 80–160ms per decision against lookahead's 5ms, got the same help on a smaller scale.
+
+**The new rule.** One garbage row every N seconds, on a clock shared by every board. Rows that queue up while a board's controller thinks are pushed in at its next lock, as in versus Tetris. The podium ranks survival first again. (`experiments/race.jsonl`, tag `time`; 3 minutes; seeds 1–8; models seeds 1–3; latency measured for real.)
+
+**Survival** and mean time survived (3 minutes = survived):
+
+| Garbage every | OR solver + advanced | OR solver | OR + advanced, no bag info | Lookahead | Dellacherie | Danger-adaptive | Well-keeper | clef-flash | clef |
+|---|---|---|---|---|---|---|---|---|---|
+| 6s | 8/8 | 8/8 | 8/8 | 8/8 | 6/8 · 178s | 2/8 · 130s | 0/8 · 141s | 0/3 · 55s | 0/3 · 75s |
+| 4s | **8/8** | **8/8** | 7/8 · 177s | 6/8 · 172s | 1/8 · 128s | 0/8 · 82s | 0/8 · 103s | — | — |
+| 3s | **2/8 · 146s** | 1/8 · 137s | 1/8 · 122s | 0/8 · 148s | 0/8 · 85s | 0/8 · 54s | 0/8 · 67s | 0/3 · 35s | 0/3 · 46s |
+| 2s | **72s** | 56s | 58s | 62s | 46s | 34s | 38s | — | — |
+
+**Mean score:**
+
+| Garbage every | OR solver + advanced | OR solver | OR + advanced, no bag info | Lookahead | Dellacherie | Danger-adaptive | Well-keeper | clef-flash | clef |
+|---|---|---|---|---|---|---|---|---|---|
+| 6s | 87,675 | 96,525 | 93,838 | **111,988** | 110,375 | 62,538 | 79,013 | 200 | 200 |
+| 4s | 116,325 | 117,413 | 118,650 | **128,275** | 71,388 | 23,625 | 48,575 | — | — |
+| 3s | 102,000 | 83,463 | 68,350 | **113,888** | 33,088 | 9,550 | 20,613 | 133 | 133 |
+| 2s | **25,638** | 12,075 | 16,563 | 22,063 | 9,963 | 4,513 | 6,225 | — | — |
+
+**Paired survival difference, OR solver + advanced against lookahead** (95% bootstrap CI over seeds):
+
+| Garbage every | Difference |
+|---|---|
+| 4s | +8s [0, 22] |
+| 3s | −3s [−30, 27] |
+| 2s | +10s [−1, 21] |
+
+T-spins per game for OR solver + advanced: 2.1 at 6s, 2.3 at 4s, 1.9 at 3s, 1.8 at 2s. The heuristics made none.
+
+## What it shows
+
+1. **How fairly the clock is set decides who looks smartest.** Under per-piece garbage the solver beat lookahead by 38–44s (Part 2). Under time-based garbage it is roughly level:
+   - it survives a little more at 4s (8/8 against 6/8) and lasts a little longer at 2s, with confidence intervals at the edge of zero;
+   - lookahead scores more whenever survival isn't at stake.
+
+   Thinking time now costs garbage, and the solver's planning roughly pays for its 100–160ms of thought.
+2. **The decision models are out of the race under real time.**
+   - clef-flash (about 2.2s per move) and clef (about 7.6s) top out in 35–75s with 130–200 points.
+   - Their pieces fall while they think (`late` up to 3.3 per game), and they face as much garbage as everyone else.
+3. **Within the solver, each part still earns its place.**
+   - **Advanced moves:** at 2s, the full solver lasts 72s against 56s without advanced moves, and makes 1.8–2.3 T-spins per game.
+   - **Bag knowledge:** at 2s, 72s with it against 58s without.
+4. **The weaker heuristics collapse once garbage is fair.** Well-keeper and danger-adaptive save rows for Tetrises, and those rows are exactly what the garbage pushes into. Plain Dellacherie also falls well behind lookahead once the interval is below 6s.
+5. **The lecture point.** A controller is only as good as the clock it is judged on:
+   - a fast, simple rule with one piece of lookahead competes with a planner that searches thousands of futures;
+   - a learned intuition that is right on average still can't keep up with gravity.
+
+## Reproduce
+
+```bash
+npm run solver   # OR solver on :8100; for parallel runs start more on 8101/8102 and set OR_SOLVER_URL per run
+node --no-warnings scripts/race.ts seeds=1-8 minutes=3 garbage=6,4,3,2 tag=time solver:300+adv solver:300 solver:300+adv+strict heuristic:lookahead heuristic:well-keeper heuristic:dellacherie heuristic:danger-adaptive
+node --no-warnings scripts/race.ts seeds=1-3 minutes=3 garbage=6,3 tag=time model:clef-flash model:clef
+node --no-warnings scripts/race-summary.ts tag=time
+```
