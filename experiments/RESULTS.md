@@ -187,7 +187,11 @@ npm test
 
 ---
 
-# Part 2: three kinds of controller at hard-mode Tetris
+# Part 2: three kinds of controller at hard-mode Tetris (garbage per piece; superseded by Part 3)
+
+> These runs used the first garbage rule: one row every N pieces placed. That rule let slow controllers dodge garbage,
+> so it was replaced by time-based garbage (Part 3). The data is kept in `experiments/race-pieces.jsonl`. The current
+> code no longer reproduces it; commit a0b590c does.
 
 **Question:** under real pressure, how do a decision model (clef / clef-flash), the best heuristics and a purpose-built operations-research (OR) solver compare?
 
@@ -200,7 +204,7 @@ npm test
 
 - **Real-time gravity.** The piece keeps falling while its controller thinks. If it lands, it locks after a 500ms lock delay wherever it is.
 - **SRS rotation with wall kicks.** That adds **tucks** (last-second slides under an overhang) and **T-spins**, scored by guideline points. Both are a per-board "advanced moves" switch.
-- **Rising garbage.** Every N pieces a row with one gap pushes the stack up, the same rows on every board.
+- **Rising garbage.** Every N pieces a row with one gap pushes the stack up, the same rows on every board. (Part 3 makes this time-based.)
 - **Speed levels.** Gravity follows the guideline curve and speeds up every 10 lines.
 
 Decisions play out visibly, one move at a time (80ms per move, soft drops 20ms per row), and gravity keeps running while they do.
@@ -263,9 +267,10 @@ T-spins per game for OR solver + advanced: 3.0 at garbage 8, 2.9 at garbage 5, 1
 
 ```bash
 npm run solver                                  # OR solver on :8100 (or the "or-solver" launch config)
+git checkout a0b590c   # the per-piece garbage rule
 node --no-warnings scripts/race.ts seeds=1-8 minutes=3 garbage=8,5,3 tag=hard solver:300+adv solver:300 solver:300+adv+strict heuristic:lookahead heuristic:dellacherie heuristic:well-keeper heuristic:danger-adaptive
 node --no-warnings scripts/race.ts seeds=1-3 minutes=3 garbage=8,5 tag=hard model:clef-flash model:clef
-node --no-warnings scripts/race-summary.ts tag=hard
+node --no-warnings scripts/race-summary.ts file=experiments/race-pieces.jsonl tag=hard
 npm test && npm run test:solver
 ```
 

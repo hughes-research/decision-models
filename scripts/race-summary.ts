@@ -4,11 +4,13 @@ import { readFileSync } from "node:fs";
 import { mulberry32 } from "../lib/tetris.ts";
 
 const opt = Object.fromEntries(process.argv.slice(2).map((a) => a.split("=") as [string, string]));
-type Row = { tag: string; contestant: string; seed: number; garbage: number; minutes: number; toppedOut: boolean; survivedS: number; score: number; pieces: number; lines: number; tspins: number; tetrises: number; late: number; missed?: number; errors?: number; avgThinkMs: number; level: number };
-// Last row wins per (tag, contestant, seed, garbage), so re-running a command does not double-count seeds.
+type Row = { tag: string; contestant: string; seed: number; garbage: number; garbageMs?: number; minutes: number; toppedOut: boolean; survivedS: number; score: number; pieces: number; lines: number; tspins: number; tetrises: number; late: number; missed?: number; errors?: number; avgThinkMs: number; level: number };
+// Rows written before garbage became time-based have no garbageMs: their `garbage` counts pieces, not seconds.
+const unit = (r: Row) => (r.garbageMs === undefined ? " pieces" : "s");
+// Last row wins per (tag, contestant, seed, garbage, unit), so re-running a command does not double-count seeds.
 const latest = new Map<string, Row>();
 for (const r of readFileSync(opt.file ?? "experiments/race.jsonl", "utf8").trim().split("\n").map((l) => JSON.parse(l) as Row)) {
-  if ((!opt.tag || r.tag === opt.tag) && r.minutes > 0) latest.set(`${r.tag}|${r.contestant}|${r.seed}|${r.garbage}`, r);
+  if ((!opt.tag || r.tag === opt.tag) && r.minutes > 0) latest.set(`${r.tag}|${r.contestant}|${r.seed}|${r.garbage}${unit(r)}`, r);
 }
 const rows = [...latest.values()];
 const vs = opt.vs ?? "heuristic:lookahead";
@@ -22,11 +24,11 @@ function ci(diffs: number[]): [number, number] {
   return [boots[100], boots[3899]];
 }
 
-const groups = [...new Set(rows.map((r) => `${r.tag}|${r.garbage}`))].sort((a, b) => a.localeCompare(b, undefined, { numeric: true }));
+const groups = [...new Set(rows.map((r) => `${r.tag}|${r.garbage}|${unit(r)}`))].sort((a, b) => a.localeCompare(b, undefined, { numeric: true }));
 for (const grp of groups) {
-  const [tag, g] = grp.split("|");
-  const at = rows.filter((r) => r.tag === tag && r.garbage === Number(g));
-  console.log(`\n${tag ? `[${tag}] ` : ""}garbage every ${g} pieces (${[...new Set(at.map((r) => r.seed))].length} seeds)`);
+  const [tag, g, u] = grp.split("|");
+  const at = rows.filter((r) => r.tag === tag && r.garbage === Number(g) && unit(r) === u);
+  console.log(`\n${tag ? `[${tag}] ` : ""}garbage every ${g}${u} (${[...new Set(at.map((r) => r.seed))].length} seeds)`);
   console.log("contestant".padEnd(28) + "survived  mean time  score    lines  T-spins  Tetrises  late  missed  errors  think   survival vs " + vs);
   for (const c of [...new Set(at.map((r) => r.contestant))]) {
     const rs = at.filter((r) => r.contestant === c);

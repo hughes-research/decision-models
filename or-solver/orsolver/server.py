@@ -28,11 +28,13 @@ class Rules(BaseModel):
     level: int = Field(1, ge=1)  # unused by the search; no upper bound so long games never get rejected
     gravityMsPerRow: int = Field(0, ge=0)
     lockDelayMs: int = Field(500, ge=0)
-    garbageEvery: int = Field(0, ge=0, le=100)
+    garbageMs: float = Field(0, ge=0, le=600_000)  # one garbage row every garbageMs of game time; 0 = off
 
 
 class State(BaseModel):
-    piecesUntilGarbage: int = Field(0, ge=0, le=100)
+    pendingGarbage: int = Field(0, ge=0, le=40)  # rows queued now; they land when this piece locks
+    msUntilGarbage: float = Field(0, ge=0, le=600_000)
+    avgPieceMs: float = Field(1000, gt=0, le=600_000)  # this board's pace, to place future rows between pieces
 
 
 class Timing(BaseModel):

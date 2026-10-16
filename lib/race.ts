@@ -4,7 +4,7 @@
 // Shared by the browser (requestAnimationFrame) and scripts/race.ts (simulated time).
 import { H, mulberry32, type Board, type Cells, type PieceName, type Action } from "./tetris.ts";
 import { cellsOf, grounded } from "./srs.ts";
-import { createGame, tick, act, pathTo, reachableNow, ghost, bagRemainder, gravityMs, type EngineConfig, type Game, type LockEvent } from "./engine.ts";
+import { createGame, tick, act, pathTo, reachableNow, ghost, bagRemainder, gravityMs, passTime, msUntilGarbage, type EngineConfig, type Game, type LockEvent } from "./engine.ts";
 import { choose } from "./heuristics.ts";
 import type { Ctx, Decision, Info } from "./controllers.ts";
 
@@ -45,8 +45,8 @@ export function begin(s: Sim, ctl?: AbortController): Ctx {
   return {
     pieceId: g.pieceId, board: g.board, piece: g.piece, next: g.next, active: g.active, reach: reachableNow(g, s.advanced),
     level: g.level, advanced: s.advanced, gravity: g.cfg.gravity, gravityMs: gravityMs(g.level), lockDelayMs: g.cfg.lockDelayMs,
-    garbageEvery: g.cfg.garbageEvery, piecesUntilGarbage: g.cfg.garbageEvery ? g.cfg.garbageEvery - (g.pieces % g.cfg.garbageEvery) : 0,
-    bagRemainder: bagRemainder(g), rng: s.rng,
+    garbageMs: g.cfg.garbageMs, msUntilGarbage: msUntilGarbage(g), pendingGarbage: g.pendingGarbage,
+    avgPieceMs: g.pieces && s.time ? Math.max(50, s.time / g.pieces) : 1000, bagRemainder: bagRemainder(g), rng: s.rng,
   };
 }
 
@@ -125,8 +125,9 @@ function onLock(s: Sim, ev: LockEvent) {
   s.plan = null;
   s.seen.clear();
   if (ev.cleared.length) s.fx.push({ board: ev.placed, rows: ev.cleared, kind: "clear", ms: FX_MS });
-  if (ev.garbage) s.fx.push({ board: s.game.board, rows: [H - 1], kind: "garbage", ms: FX_MS });
+  if (ev.garbage) s.fx.push({ board: s.game.board, rows: Array.from({ length: ev.garbage }, (_, i) => H - 1 - i), kind: "garbage", ms: FX_MS });
   s.fxLeft = s.fx[0]?.ms ?? 0;
+  if (s.game.over) s.overAt ??= s.time; // every top-out happens in a lock, including one made in fail()
 }
 
 // Advance game time by `ms` (fixed STEP substeps). Actions cost `actionMs` each; soft drops a quarter of that.
@@ -137,6 +138,7 @@ export function advance(s: Sim, ms: number, actionMs: number): LockEvent[] {
   while (s.acc >= STEP) {
     if (needsDecision(s)) break; // stop exactly at spawn so the ask happens at the same game time everywhere
     s.acc -= STEP;
+    passTime(g, STEP);
     if (s.fx.length) {
       s.time += STEP;
       s.fxLeft -= STEP;
@@ -183,7 +185,8 @@ export function advance(s: Sim, ms: number, actionMs: number): LockEvent[] {
 export type View = {
   key: string; board: Board; flash: number[]; flashKind: "clear" | "garbage" | null;
   piece: { name: PieceName; cells: Cells } | null; ghost: { cells: Cells; kind: "drop" | "target" } | null;
-  next: PieceName; level: number; lines: number; score: number; pieces: number; tspins: number; tetrises: number; garbageIn: number;
+  next: PieceName; level: number; lines: number; score: number; pieces: number; tspins: number; tetrises: number;
+  garbageInMs: number | null; garbageQueued: number;
   phase: "idle" | "thinking" | "moving" | "over" | "error"; thinkMs: number | null; lockInMs: number | null;
   info: Info | null; note: string | null; error: string | null; stats: Stats & { avgMs: number };
 };
@@ -202,12 +205,13 @@ export function viewOf(s: Sim): View {
   }
   const phase = g.over ? "over" : s.error ? "error" : s.pending ? "thinking" : s.target ? "moving" : "idle";
   return {
-    key: [g.pieceId, g.active.x, g.active.y, g.active.rot, g.pieces, s.fx.length, phase, thinkMs === null ? -1 : Math.floor(thinkMs / 100), s.note, s.error, s.target?.key ?? ""].join("|"),
+    key: [g.pieceId, g.active.x, g.active.y, g.active.rot, g.pieces, s.fx.length, phase, thinkMs === null ? -1 : Math.floor(thinkMs / 100), s.note, s.error, s.target?.key ?? "",
+      g.cfg.garbageMs ? Math.floor(msUntilGarbage(g) / 100) : 0, g.pendingGarbage].join("|"),
     board: fx ? fx.board : g.board, flash: fx ? fx.rows : NO_ROWS, flashKind: fx ? fx.kind : null,
     piece: live ? { name: g.piece, cells: cellsOf(g.piece, g.active) } : null,
     ghost: !live ? null : s.target ? { cells: s.target.cells, kind: "target" } : { cells: cellsOf(g.piece, ghost(g)), kind: "drop" },
     next: g.next, level: g.level, lines: g.lines, score: g.score, pieces: g.pieces, tspins: g.tspins, tetrises: g.tetrises,
-    garbageIn: g.cfg.garbageEvery ? g.cfg.garbageEvery - (g.pieces % g.cfg.garbageEvery) : 0,
+    garbageInMs: g.cfg.garbageMs ? msUntilGarbage(g) : null, garbageQueued: g.pendingGarbage,
     phase, thinkMs, lockInMs, info: s.info, note: s.note, error: s.error,
     stats: { ...s.stats, avgMs: s.stats.decisions ? s.stats.thinkMs / s.stats.decisions : 0 },
   };

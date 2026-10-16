@@ -38,8 +38,8 @@ test("an instant decision is played out visibly and lands exactly on its target"
   assert.equal(s.stats.late, 0);
 });
 
-test("same seed: different play, same pieces and the same garbage schedule", () => {
-  const cfg = { ...DEFAULT_CONFIG, garbageEvery: 3 };
+test("same seed: different play, same pieces and the same garbage clock", () => {
+  const cfg = { ...DEFAULT_CONFIG, garbageMs: 3000 };
   const a = createSim(cfg, 11, false), b = createSim(cfg, 11, false);
   for (let n = 0; n < 12; n++) for (const [s, first] of [[a, true], [b, false]] as [Sim, boolean][]) {
     if (s.game.over) continue;
@@ -50,8 +50,8 @@ test("same seed: different play, same pieces and the same garbage schedule", () 
   }
   const len = Math.min(a.game.dealt.length, b.game.dealt.length);
   assert.deepEqual(a.game.dealt.slice(0, len), b.game.dealt.slice(0, len));
-  assert.equal(a.game.garbageRows, Math.floor(a.game.pieces / 3));
-  assert.equal(b.game.garbageRows, Math.floor(b.game.pieces / 3));
+  // Garbage depends on time only: rows pushed in plus rows still queued = elapsed time / 3s, on both boards.
+  for (const s of [a, b]) if (!s.game.over) assert.equal(s.game.garbageRows + s.game.pendingGarbage, Math.floor(s.time / 3000));
 });
 
 test("a decision that arrives with too little lock delay left is counted as missed, not silently", () => {

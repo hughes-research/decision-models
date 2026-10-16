@@ -61,7 +61,7 @@ def test_garbage_landing_now_is_planned_for():
     rows = ts_rows("empty")
     for y in range(2, H):
         rows[y] = [1 if x not in (4, 5) else 0 for x in range(W)]
-    out = solve({**req(rows, "O", nxt="I"), "rules": {"garbageEvery": 8}, "state": {"piecesUntilGarbage": 1}})
+    out = solve({**req(rows, "O", nxt="I"), "rules": {"garbageMs": 6000}, "state": {"pendingGarbage": 1, "msUntilGarbage": 6000, "avgPieceMs": 800}})
     assert all(y > 0 for _, y in out["placement"]["cells"]), out["placement"]
 
 

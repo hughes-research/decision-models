@@ -2,7 +2,7 @@ import { test } from "node:test";
 import assert from "node:assert/strict";
 import { emptyBoard, H, W, GARBAGE, type Board } from "./tetris.ts";
 import { hardDrop } from "./srs.ts";
-import { createGame, tick, act, addGarbage, pathTo, reachableNow, bagRemainder, gravityMs, points, GRAVITY_MS, DEFAULT_CONFIG } from "./engine.ts";
+import { createGame, tick, act, addGarbage, passTime, pathTo, reachableNow, bagRemainder, gravityMs, points, GRAVITY_MS, DEFAULT_CONFIG } from "./engine.ts";
 
 const CFG = DEFAULT_CONFIG;
 
@@ -31,7 +31,7 @@ test("gravity moves the piece and the lock delay locks it", () => {
 });
 
 test("garbage is deterministic, has one gap, and overflow tops out", () => {
-  const a = createGame({ ...CFG, garbageEvery: 1 }, 42), b = createGame({ ...CFG, garbageEvery: 1 }, 42);
+  const a = createGame({ ...CFG, garbageMs: 1000 }, 42), b = createGame({ ...CFG, garbageMs: 1000 }, 42);
   for (let i = 0; i < 5; i++) { addGarbage(a); addGarbage(b); }
   assert.deepEqual(a.board, b.board);
   for (const row of a.board.slice(H - 5)) {
@@ -80,4 +80,16 @@ test("bag remainder follows the pieces dealt", () => {
   for (let i = 0; i < 5; i++) act(g, "drop");
   assert.equal(g.dealt.length, 7);
   assert.deepEqual(bagRemainder(g), []);
+});
+
+test("garbage is on a clock: rows queue by time and land at the next lock", () => {
+  const g = createGame({ ...CFG, gravity: false, garbageMs: 2000 }, 3);
+  passTime(g, 5000); // a slow controller: 5 seconds, no lock yet
+  assert.equal(g.pendingGarbage, 2);
+  assert.equal(g.garbageRows, 0);
+  const ev = act(g, "drop").lock!;
+  assert.equal(ev.garbage, 2);
+  assert.equal(g.garbageRows, 2);
+  assert.equal(g.pendingGarbage, 0);
+  assert.ok(g.board[H - 1].includes(GARBAGE) && g.board[H - 2].includes(GARBAGE));
 });

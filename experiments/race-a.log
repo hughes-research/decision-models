@@ -1,120 +1,160 @@
-g 8 seed  1 solver:300+adv             survived     score  82000 pieces  220 lines 109 lvl 11 T-spins 4 Tetrises 0 late 0 missed 0 think 137ms
-g 8 seed  1 heuristic:lookahead        survived     score 122200 pieces  280 lines 137 lvl 14 T-spins 0 Tetrises 0 late 0 missed 5 think 5ms
-g 8 seed  1 heuristic:well-keeper      TOPPED OUT 97s score  34100 pieces  175 lines  73 lvl 8 T-spins 0 Tetrises 0 late 0 missed 1 think 0ms
-g 8 seed  1 heuristic:dellacherie      TOPPED OUT 154s score  97200 pieces  272 lines 125 lvl 13 T-spins 0 Tetrises 0 late 0 missed 5 think 0ms
-g 8 seed  1 heuristic:danger-adaptive  TOPPED OUT 80s score  19100 pieces  136 lines  53 lvl 6 T-spins 0 Tetrises 1 late 0 missed 0 think 0ms
-g 8 seed  2 solver:300+adv             survived     score  91300 pieces  229 lines 113 lvl 12 T-spins 1 Tetrises 0 late 0 missed 2 think 133ms
-g 8 seed  2 heuristic:lookahead        survived     score 113200 pieces  273 lines 134 lvl 14 T-spins 0 Tetrises 0 late 0 missed 3 think 5ms
-g 8 seed  2 heuristic:well-keeper      TOPPED OUT 140s score  80800 pieces  230 lines 102 lvl 11 T-spins 0 Tetrises 2 late 0 missed 5 think 0ms
-g 8 seed  2 heuristic:dellacherie      survived     score 159500 pieces  332 lines 157 lvl 16 T-spins 0 Tetrises 0 late 0 missed 7 think 0ms
-g 8 seed  2 heuristic:danger-adaptive  TOPPED OUT 93s score  26400 pieces  152 lines  62 lvl 7 T-spins 0 Tetrises 0 late 0 missed 0 think 0ms
-g 8 seed  3 solver:300+adv             survived     score  80500 pieces  220 lines 109 lvl 11 T-spins 4 Tetrises 0 late 0 missed 0 think 138ms
-g 8 seed  3 heuristic:lookahead        survived     score 120200 pieces  271 lines 135 lvl 14 T-spins 0 Tetrises 0 late 0 missed 3 think 5ms
-g 8 seed  3 heuristic:well-keeper      TOPPED OUT 146s score  90300 pieces  252 lines 113 lvl 12 T-spins 0 Tetrises 1 late 0 missed 4 think 0ms
-g 8 seed  3 heuristic:dellacherie      TOPPED OUT 96s score  26500 pieces  152 lines  62 lvl 7 T-spins 0 Tetrises 0 late 0 missed 0 think 0ms
-g 8 seed  3 heuristic:danger-adaptive  TOPPED OUT 132s score  60000 pieces  216 lines  95 lvl 10 T-spins 0 Tetrises 0 late 0 missed 0 think 0ms
-g 8 seed  4 solver:300+adv             survived     score  89500 pieces  224 lines 113 lvl 12 T-spins 1 Tetrises 0 late 0 missed 0 think 136ms
-g 8 seed  4 heuristic:lookahead        survived     score 115300 pieces  275 lines 133 lvl 14 T-spins 0 Tetrises 0 late 0 missed 3 think 5ms
-g 8 seed  4 heuristic:well-keeper      TOPPED OUT 123s score  57700 pieces  216 lines  94 lvl 10 T-spins 0 Tetrises 0 late 0 missed 4 think 0ms
-g 8 seed  4 heuristic:dellacherie      TOPPED OUT 126s score  65600 pieces  225 lines  99 lvl 10 T-spins 0 Tetrises 0 late 0 missed 2 think 0ms
-g 8 seed  4 heuristic:danger-adaptive  TOPPED OUT 70s score  13700 pieces  118 lines  44 lvl 5 T-spins 0 Tetrises 0 late 0 missed 0 think 0ms
-g 8 seed  5 solver:300+adv             survived     score  83000 pieces  219 lines 108 lvl 11 T-spins 7 Tetrises 0 late 0 missed 0 think 143ms
-g 8 seed  5 heuristic:lookahead        survived     score 131500 pieces  281 lines 140 lvl 15 T-spins 0 Tetrises 0 late 0 missed 4 think 5ms
-g 8 seed  5 heuristic:well-keeper      TOPPED OUT 105s score  50500 pieces  197 lines  85 lvl 9 T-spins 0 Tetrises 0 late 0 missed 1 think 0ms
-g 8 seed  5 heuristic:dellacherie      TOPPED OUT 157s score  92800 pieces  272 lines 123 lvl 13 T-spins 0 Tetrises 0 late 0 missed 4 think 0ms
-g 8 seed  5 heuristic:danger-adaptive  TOPPED OUT 85s score  19000 pieces  136 lines  54 lvl 6 T-spins 0 Tetrises 0 late 0 missed 0 think 0ms
-g 8 seed  6 solver:300+adv             survived     score  95200 pieces  224 lines 111 lvl 12 T-spins 1 Tetrises 1 late 0 missed 1 think 139ms
-g 8 seed  6 heuristic:lookahead        survived     score 113700 pieces  273 lines 131 lvl 14 T-spins 0 Tetrises 0 late 0 missed 5 think 5ms
-g 8 seed  6 heuristic:well-keeper      TOPPED OUT 81s score  23500 pieces  144 lines  57 lvl 6 T-spins 0 Tetrises 1 late 0 missed 1 think 0ms
-g 8 seed  6 heuristic:dellacherie      survived     score 123000 pieces  280 lines 138 lvl 14 T-spins 0 Tetrises 0 late 0 missed 4 think 0ms
-g 8 seed  6 heuristic:danger-adaptive  TOPPED OUT 87s score  24400 pieces  150 lines  60 lvl 7 T-spins 0 Tetrises 0 late 0 missed 0 think 0ms
-g 8 seed  7 solver:300+adv             survived     score  86000 pieces  220 lines 110 lvl 12 T-spins 4 Tetrises 0 late 0 missed 0 think 141ms
-g 8 seed  7 heuristic:lookahead        survived     score 135400 pieces  292 lines 145 lvl 15 T-spins 0 Tetrises 0 late 0 missed 5 think 5ms
-g 8 seed  7 heuristic:well-keeper      TOPPED OUT 141s score  78700 pieces  240 lines 107 lvl 11 T-spins 0 Tetrises 0 late 0 missed 2 think 0ms
-g 8 seed  7 heuristic:dellacherie      TOPPED OUT 171s score  86700 pieces  266 lines 120 lvl 13 T-spins 0 Tetrises 0 late 0 missed 4 think 0ms
-g 8 seed  7 heuristic:danger-adaptive  TOPPED OUT 164s score  96800 pieces  279 lines 126 lvl 13 T-spins 0 Tetrises 0 late 0 missed 2 think 0ms
-g 8 seed  8 solver:300+adv             survived     score  95900 pieces  224 lines 112 lvl 12 T-spins 2 Tetrises 0 late 0 missed 1 think 141ms
-g 8 seed  8 heuristic:lookahead        survived     score 121500 pieces  273 lines 137 lvl 14 T-spins 0 Tetrises 0 late 0 missed 1 think 5ms
-g 8 seed  8 heuristic:well-keeper      TOPPED OUT 76s score  19300 pieces  137 lines  54 lvl 6 T-spins 0 Tetrises 0 late 0 missed 0 think 0ms
-g 8 seed  8 heuristic:dellacherie      TOPPED OUT 125s score  60100 pieces  218 lines  95 lvl 10 T-spins 0 Tetrises 0 late 0 missed 1 think 0ms
-g 8 seed  8 heuristic:danger-adaptive  TOPPED OUT 66s score  12100 pieces  112 lines  41 lvl 5 T-spins 0 Tetrises 0 late 0 missed 0 think 0ms
-g 5 seed  1 solver:300+adv             TOPPED OUT 180s score 107200 pieces  246 lines 126 lvl 13 T-spins 3 Tetrises 0 late 0 missed 4 think 116ms
-g 5 seed  1 heuristic:lookahead        TOPPED OUT 163s score 123600 pieces  268 lines 139 lvl 14 T-spins 0 Tetrises 0 late 0 missed 5 think 5ms
-g 5 seed  1 heuristic:well-keeper      TOPPED OUT 24s score   1200 pieces   41 lines   9 lvl 1 T-spins 0 Tetrises 0 late 0 missed 0 think 0ms
-g 5 seed  1 heuristic:dellacherie      TOPPED OUT 63s score  15500 pieces  108 lines  46 lvl 5 T-spins 0 Tetrises 0 late 0 missed 0 think 0ms
-g 5 seed  1 heuristic:danger-adaptive  TOPPED OUT 36s score   2900 pieces   59 lines  18 lvl 2 T-spins 0 Tetrises 0 late 0 missed 0 think 0ms
-g 5 seed  2 solver:300+adv             survived     score 138100 pieces  264 lines 140 lvl 15 T-spins 3 Tetrises 0 late 0 missed 3 think 101ms
-g 5 seed  2 heuristic:lookahead        TOPPED OUT 137s score  91900 pieces  228 lines 115 lvl 12 T-spins 0 Tetrises 0 late 0 missed 3 think 5ms
-g 5 seed  2 heuristic:well-keeper      TOPPED OUT 69s score  19700 pieces  118 lines  51 lvl 6 T-spins 0 Tetrises 1 late 0 missed 0 think 0ms
-g 5 seed  2 heuristic:dellacherie      TOPPED OUT 66s score  16000 pieces  112 lines  48 lvl 5 T-spins 0 Tetrises 0 late 0 missed 0 think 0ms
-g 5 seed  2 heuristic:danger-adaptive  TOPPED OUT 44s score   4700 pieces   71 lines  24 lvl 3 T-spins 0 Tetrises 0 late 0 missed 0 think 0ms
-g 5 seed  3 solver:300+adv             survived     score 128400 pieces  236 lines 133 lvl 14 T-spins 1 Tetrises 1 late 0 missed 1 think 128ms
-g 5 seed  3 heuristic:lookahead        TOPPED OUT 123s score  71700 pieces  210 lines 105 lvl 11 T-spins 0 Tetrises 0 late 0 missed 3 think 5ms
-g 5 seed  3 heuristic:well-keeper      TOPPED OUT 80s score  25100 pieces  126 lines  58 lvl 6 T-spins 0 Tetrises 1 late 0 missed 0 think 0ms
-g 5 seed  3 heuristic:dellacherie      TOPPED OUT 93s score  32300 pieces  148 lines  70 lvl 8 T-spins 0 Tetrises 0 late 0 missed 1 think 0ms
-g 5 seed  3 heuristic:danger-adaptive  TOPPED OUT 68s score  13900 pieces  104 lines  44 lvl 5 T-spins 0 Tetrises 0 late 0 missed 0 think 0ms
-g 5 seed  4 solver:300+adv             survived     score 119300 pieces  238 lines 129 lvl 13 T-spins 5 Tetrises 0 late 0 missed 3 think 122ms
-g 5 seed  4 heuristic:lookahead        TOPPED OUT 95s score  42000 pieces  161 lines  79 lvl 8 T-spins 0 Tetrises 0 late 0 missed 0 think 4ms
-g 5 seed  4 heuristic:well-keeper      TOPPED OUT 47s score   7500 pieces   80 lines  31 lvl 4 T-spins 0 Tetrises 0 late 0 missed 0 think 0ms
-g 5 seed  4 heuristic:dellacherie      TOPPED OUT 86s score  30700 pieces  144 lines  67 lvl 7 T-spins 0 Tetrises 0 late 0 missed 1 think 0ms
-g 5 seed  4 heuristic:danger-adaptive  TOPPED OUT 69s score  16800 pieces  114 lines  49 lvl 5 T-spins 0 Tetrises 0 late 0 missed 0 think 0ms
-g 5 seed  5 solver:300+adv             survived     score 116400 pieces  235 lines 132 lvl 14 T-spins 1 Tetrises 0 late 0 missed 2 think 129ms
-g 5 seed  5 heuristic:lookahead        TOPPED OUT 139s score  87500 pieces  220 lines 112 lvl 12 T-spins 0 Tetrises 1 late 0 missed 4 think 5ms
-g 5 seed  5 heuristic:well-keeper      TOPPED OUT 56s score  11800 pieces   96 lines  39 lvl 4 T-spins 0 Tetrises 0 late 0 missed 0 think 0ms
-g 5 seed  5 heuristic:dellacherie      TOPPED OUT 95s score  41300 pieces  165 lines  79 lvl 8 T-spins 0 Tetrises 0 late 0 missed 1 think 0ms
-g 5 seed  5 heuristic:danger-adaptive  TOPPED OUT 51s score   8200 pieces   89 lines  34 lvl 4 T-spins 0 Tetrises 0 late 0 missed 0 think 0ms
-g 5 seed  6 solver:300+adv             survived     score 147700 pieces  252 lines 139 lvl 14 T-spins 4 Tetrises 0 late 0 missed 3 think 118ms
-g 5 seed  6 heuristic:lookahead        TOPPED OUT 140s score  76200 pieces  215 lines 108 lvl 11 T-spins 0 Tetrises 0 late 0 missed 3 think 5ms
-g 5 seed  6 heuristic:well-keeper      TOPPED OUT 47s score   7900 pieces   81 lines  31 lvl 4 T-spins 0 Tetrises 0 late 0 missed 0 think 0ms
-g 5 seed  6 heuristic:dellacherie      TOPPED OUT 138s score  89500 pieces  230 lines 117 lvl 12 T-spins 0 Tetrises 1 late 0 missed 3 think 0ms
-g 5 seed  6 heuristic:danger-adaptive  TOPPED OUT 51s score   7700 pieces   84 lines  32 lvl 4 T-spins 0 Tetrises 0 late 0 missed 0 think 0ms
-g 5 seed  7 solver:300+adv             TOPPED OUT 170s score 108100 pieces  241 lines 123 lvl 13 T-spins 4 Tetrises 0 late 0 missed 3 think 114ms
-g 5 seed  7 heuristic:lookahead        TOPPED OUT 130s score  76400 pieces  215 lines 108 lvl 11 T-spins 0 Tetrises 0 late 0 missed 2 think 5ms
-g 5 seed  7 heuristic:well-keeper      TOPPED OUT 60s score  15400 pieces  105 lines  44 lvl 5 T-spins 0 Tetrises 0 late 0 missed 0 think 0ms
-g 5 seed  7 heuristic:dellacherie      TOPPED OUT 96s score  36000 pieces  156 lines  74 lvl 8 T-spins 0 Tetrises 0 late 0 missed 0 think 0ms
-g 5 seed  7 heuristic:danger-adaptive  TOPPED OUT 48s score   6800 pieces   77 lines  29 lvl 3 T-spins 0 Tetrises 0 late 0 missed 0 think 0ms
-g 5 seed  8 solver:300+adv             survived     score 120700 pieces  245 lines 134 lvl 14 T-spins 2 Tetrises 0 late 0 missed 1 think 121ms
-g 5 seed  8 heuristic:lookahead        TOPPED OUT 149s score  79800 pieces  221 lines 113 lvl 12 T-spins 0 Tetrises 0 late 0 missed 5 think 5ms
-g 5 seed  8 heuristic:well-keeper      TOPPED OUT 60s score  14800 pieces  105 lines  45 lvl 5 T-spins 0 Tetrises 0 late 0 missed 0 think 0ms
-g 5 seed  8 heuristic:dellacherie      TOPPED OUT 50s score   7100 pieces   83 lines  31 lvl 4 T-spins 0 Tetrises 0 late 0 missed 0 think 0ms
-g 5 seed  8 heuristic:danger-adaptive  TOPPED OUT 54s score  11400 pieces   90 lines  36 lvl 4 T-spins 0 Tetrises 2 late 0 missed 0 think 0ms
-g 3 seed  1 solver:300+adv             TOPPED OUT 90s score  39500 pieces  130 lines  74 lvl 8 T-spins 2 Tetrises 0 late 0 missed 0 think 107ms
-g 3 seed  1 heuristic:lookahead        TOPPED OUT 48s score  10700 pieces   77 lines  37 lvl 4 T-spins 0 Tetrises 0 late 0 missed 0 think 4ms
-g 3 seed  1 heuristic:well-keeper      TOPPED OUT 32s score   4300 pieces   54 lines  22 lvl 3 T-spins 0 Tetrises 0 late 0 missed 0 think 0ms
-g 3 seed  1 heuristic:dellacherie      TOPPED OUT 30s score   3100 pieces   51 lines  19 lvl 2 T-spins 0 Tetrises 0 late 0 missed 0 think 0ms
-g 3 seed  1 heuristic:danger-adaptive  TOPPED OUT 29s score   3100 pieces   49 lines  18 lvl 2 T-spins 0 Tetrises 0 late 0 missed 0 think 0ms
-g 3 seed  2 solver:300+adv             TOPPED OUT 78s score  22400 pieces  103 lines  55 lvl 6 T-spins 1 Tetrises 0 late 0 missed 0 think 128ms
-g 3 seed  2 heuristic:lookahead        TOPPED OUT 65s score  22900 pieces  103 lines  56 lvl 6 T-spins 0 Tetrises 0 late 0 missed 0 think 4ms
-g 3 seed  2 heuristic:well-keeper      TOPPED OUT 38s score   5300 pieces   60 lines  26 lvl 3 T-spins 0 Tetrises 0 late 0 missed 0 think 0ms
-g 3 seed  2 heuristic:dellacherie      TOPPED OUT 40s score   6500 pieces   66 lines  29 lvl 3 T-spins 0 Tetrises 0 late 0 missed 0 think 0ms
-g 3 seed  2 heuristic:danger-adaptive  TOPPED OUT 39s score   6500 pieces   63 lines  28 lvl 3 T-spins 0 Tetrises 0 late 0 missed 0 think 0ms
-g 3 seed  3 solver:300+adv             TOPPED OUT 104s score  52400 pieces  142 lines  83 lvl 9 T-spins 1 Tetrises 1 late 0 missed 0 think 124ms
-g 3 seed  3 heuristic:lookahead        TOPPED OUT 72s score  29800 pieces  114 lines  63 lvl 7 T-spins 0 Tetrises 0 late 0 missed 0 think 4ms
-g 3 seed  3 heuristic:well-keeper      TOPPED OUT 30s score   2900 pieces   48 lines  17 lvl 2 T-spins 0 Tetrises 0 late 0 missed 0 think 0ms
-g 3 seed  3 heuristic:dellacherie      TOPPED OUT 36s score   4200 pieces   57 lines  23 lvl 3 T-spins 0 Tetrises 0 late 0 missed 0 think 0ms
-g 3 seed  3 heuristic:danger-adaptive  TOPPED OUT 39s score   5500 pieces   61 lines  27 lvl 3 T-spins 0 Tetrises 0 late 0 missed 0 think 0ms
-g 3 seed  4 solver:300+adv             TOPPED OUT 103s score  52900 pieces  141 lines  81 lvl 9 T-spins 3 Tetrises 1 late 0 missed 0 think 112ms
-g 3 seed  4 heuristic:lookahead        TOPPED OUT 66s score  23200 pieces  102 lines  55 lvl 6 T-spins 0 Tetrises 0 late 0 missed 0 think 5ms
-g 3 seed  4 heuristic:well-keeper      TOPPED OUT 25s score   2000 pieces   43 lines  13 lvl 2 T-spins 0 Tetrises 0 late 0 missed 0 think 0ms
-g 3 seed  4 heuristic:dellacherie      TOPPED OUT 34s score   4200 pieces   54 lines  22 lvl 3 T-spins 0 Tetrises 0 late 0 missed 0 think 0ms
-g 3 seed  4 heuristic:danger-adaptive  TOPPED OUT 32s score   4000 pieces   54 lines  21 lvl 3 T-spins 0 Tetrises 0 late 0 missed 0 think 0ms
-g 3 seed  5 solver:300+adv             TOPPED OUT 127s score  72700 pieces  168 lines 101 lvl 11 T-spins 4 Tetrises 0 late 0 missed 2 think 126ms
-g 3 seed  5 heuristic:lookahead        TOPPED OUT 48s score  11400 pieces   75 lines  37 lvl 4 T-spins 0 Tetrises 1 late 0 missed 0 think 4ms
-g 3 seed  5 heuristic:well-keeper      TOPPED OUT 38s score   6000 pieces   64 lines  28 lvl 3 T-spins 0 Tetrises 0 late 0 missed 0 think 0ms
-g 3 seed  5 heuristic:dellacherie      TOPPED OUT 45s score   9100 pieces   72 lines  33 lvl 4 T-spins 0 Tetrises 0 late 0 missed 0 think 0ms
-g 3 seed  5 heuristic:danger-adaptive  TOPPED OUT 46s score   8700 pieces   72 lines  34 lvl 4 T-spins 0 Tetrises 0 late 0 missed 0 think 0ms
-g 3 seed  6 solver:300+adv             TOPPED OUT 114s score  79500 pieces  163 lines  97 lvl 10 T-spins 3 Tetrises 0 late 0 missed 0 think 110ms
-g 3 seed  6 heuristic:lookahead        TOPPED OUT 83s score  39100 pieces  132 lines  76 lvl 8 T-spins 0 Tetrises 0 late 0 missed 1 think 5ms
-g 3 seed  6 heuristic:well-keeper      TOPPED OUT 31s score   4000 pieces   54 lines  21 lvl 3 T-spins 0 Tetrises 0 late 0 missed 0 think 0ms
-g 3 seed  6 heuristic:dellacherie      TOPPED OUT 56s score  15000 pieces   93 lines  47 lvl 5 T-spins 0 Tetrises 0 late 0 missed 0 think 0ms
-g 3 seed  6 heuristic:danger-adaptive  TOPPED OUT 38s score   5400 pieces   63 lines  27 lvl 3 T-spins 0 Tetrises 0 late 0 missed 0 think 0ms
-g 3 seed  7 solver:300+adv             TOPPED OUT 76s score  21600 pieces  102 lines  54 lvl 6 T-spins 0 Tetrises 0 late 0 missed 0 think 121ms
-g 3 seed  7 heuristic:lookahead        TOPPED OUT 30s score   3400 pieces   51 lines  19 lvl 2 T-spins 0 Tetrises 0 late 0 missed 0 think 4ms
-g 3 seed  7 heuristic:well-keeper      TOPPED OUT 34s score   5600 pieces   58 lines  24 lvl 3 T-spins 0 Tetrises 0 late 0 missed 0 think 0ms
-g 3 seed  7 heuristic:dellacherie      TOPPED OUT 47s score  10700 pieces   77 lines  37 lvl 4 T-spins 0 Tetrises 0 late 0 missed 0 think 0ms
-g 3 seed  7 heuristic:danger-adaptive  TOPPED OUT 40s score   7600 pieces   66 lines  30 lvl 4 T-spins 0 Tetrises 1 late 0 missed 0 think 0ms
-g 3 seed  8 solver:300+adv             TOPPED OUT 83s score  24400 pieces  109 lines  59 lvl 6 T-spins 0 Tetrises 0 late 0 missed 0 think 133ms
-g 3 seed  8 heuristic:lookahead        TOPPED OUT 60s score  19300 pieces   96 lines  51 lvl 6 T-spins 0 Tetrises 0 late 0 missed 0 think 5ms
-g 3 seed  8 heuristic:well-keeper      TOPPED OUT 27s score   2400 pieces   46 lines  15 lvl 2 T-spins 0 Tetrises 0 late 0 missed 0 think 0ms
-g 3 seed  8 heuristic:dellacherie      TOPPED OUT 31s score   3400 pieces   51 lines  20 lvl 3 T-spins 0 Tetrises 0 late 0 missed 0 think 0ms
-g 3 seed  8 heuristic:danger-adaptive  TOPPED OUT 26s score   1800 pieces   42 lines  13 lvl 2 T-spins 0 Tetrises 0 late 0 missed 0 think 0ms
+g  6s seed  1 solver:300+adv             survived     score  91800 pieces  222 lines 114 lvl 12 T-spins 3 Tetrises 0 late 0 missed 0 think 160ms
+g  6s seed  1 heuristic:lookahead        survived     score 119300 pieces  274 lines 133 lvl 14 T-spins 0 Tetrises 0 late 0 missed 5 think 6ms
+g  6s seed  1 heuristic:well-keeper      TOPPED OUT 136s score  76400 pieces  257 lines 107 lvl 11 T-spins 0 Tetrises 1 late 0 missed 4 think 0ms
+g  6s seed  1 heuristic:dellacherie      TOPPED OUT 166s score  92200 pieces  281 lines 121 lvl 13 T-spins 0 Tetrises 0 late 0 missed 5 think 0ms
+g  6s seed  1 heuristic:danger-adaptive  TOPPED OUT 69s score  11600 pieces  115 lines  40 lvl 5 T-spins 0 Tetrises 0 late 0 missed 0 think 0ms
+g  6s seed  2 solver:300+adv             survived     score  82100 pieces  213 lines 109 lvl 11 T-spins 2 Tetrises 0 late 0 missed 0 think 167ms
+g  6s seed  2 heuristic:lookahead        survived     score 117500 pieces  272 lines 134 lvl 14 T-spins 0 Tetrises 0 late 0 missed 1 think 5ms
+g  6s seed  2 heuristic:well-keeper      TOPPED OUT 146s score  73800 pieces  247 lines 105 lvl 11 T-spins 0 Tetrises 0 late 0 missed 4 think 0ms
+g  6s seed  2 heuristic:dellacherie      TOPPED OUT 175s score 103500 pieces  297 lines 129 lvl 13 T-spins 0 Tetrises 0 late 0 missed 9 think 0ms
+g  6s seed  2 heuristic:danger-adaptive  TOPPED OUT 140s score  65500 pieces  247 lines 103 lvl 11 T-spins 0 Tetrises 0 late 0 missed 0 think 0ms
+g  6s seed  3 solver:300+adv             survived     score  88400 pieces  218 lines 111 lvl 12 T-spins 0 Tetrises 1 late 0 missed 2 think 152ms
+g  6s seed  3 heuristic:lookahead        survived     score 111000 pieces  276 lines 132 lvl 14 T-spins 0 Tetrises 0 late 0 missed 1 think 5ms
+g  6s seed  3 heuristic:well-keeper      TOPPED OUT 171s score 123800 pieces  315 lines 135 lvl 14 T-spins 0 Tetrises 2 late 0 missed 7 think 0ms
+g  6s seed  3 heuristic:dellacherie      survived     score 111000 pieces  283 lines 132 lvl 14 T-spins 0 Tetrises 0 late 0 missed 3 think 0ms
+g  6s seed  3 heuristic:danger-adaptive  TOPPED OUT 123s score  43000 pieces  196 lines  81 lvl 9 T-spins 0 Tetrises 0 late 0 missed 0 think 0ms
+g  6s seed  4 solver:300+adv             survived     score  84900 pieces  218 lines 111 lvl 12 T-spins 2 Tetrises 0 late 0 missed 0 think 154ms
+g  6s seed  4 heuristic:lookahead        survived     score 108300 pieces  274 lines 129 lvl 13 T-spins 0 Tetrises 0 late 0 missed 1 think 6ms
+g  6s seed  4 heuristic:well-keeper      TOPPED OUT 143s score  74900 pieces  253 lines 106 lvl 11 T-spins 0 Tetrises 0 late 0 missed 2 think 0ms
+g  6s seed  4 heuristic:dellacherie      survived     score 134200 pieces  329 lines 146 lvl 15 T-spins 0 Tetrises 0 late 0 missed 12 think 0ms
+g  6s seed  4 heuristic:danger-adaptive  survived     score 118200 pieces  281 lines 134 lvl 14 T-spins 0 Tetrises 0 late 0 missed 2 think 0ms
+g  6s seed  5 solver:300+adv             survived     score  84300 pieces  218 lines 112 lvl 12 T-spins 2 Tetrises 0 late 0 missed 0 think 158ms
+g  6s seed  5 heuristic:lookahead        survived     score 107500 pieces  270 lines 131 lvl 14 T-spins 0 Tetrises 0 late 0 missed 2 think 6ms
+g  6s seed  5 heuristic:well-keeper      TOPPED OUT 123s score  53700 pieces  212 lines  88 lvl 9 T-spins 0 Tetrises 1 late 0 missed 0 think 0ms
+g  6s seed  5 heuristic:dellacherie      survived     score 110500 pieces  277 lines 132 lvl 14 T-spins 0 Tetrises 0 late 0 missed 0 think 0ms
+g  6s seed  5 heuristic:danger-adaptive  survived     score 126400 pieces  296 lines 136 lvl 14 T-spins 0 Tetrises 3 late 0 missed 2 think 0ms
+g  6s seed  6 solver:300+adv             survived     score  86800 pieces  216 lines 111 lvl 12 T-spins 3 Tetrises 0 late 0 missed 0 think 172ms
+g  6s seed  6 heuristic:lookahead        survived     score 105900 pieces  275 lines 129 lvl 13 T-spins 0 Tetrises 0 late 0 missed 5 think 6ms
+g  6s seed  6 heuristic:well-keeper      TOPPED OUT 159s score 109200 pieces  307 lines 131 lvl 14 T-spins 0 Tetrises 0 late 0 missed 6 think 0ms
+g  6s seed  6 heuristic:dellacherie      survived     score 106700 pieces  271 lines 131 lvl 14 T-spins 0 Tetrises 0 late 0 missed 1 think 0ms
+g  6s seed  6 heuristic:danger-adaptive  TOPPED OUT 112s score  36300 pieces  186 lines  75 lvl 8 T-spins 0 Tetrises 0 late 0 missed 0 think 0ms
+g  6s seed  7 solver:300+adv             survived     score  89600 pieces  211 lines 110 lvl 12 T-spins 3 Tetrises 0 late 0 missed 0 think 179ms
+g  6s seed  7 heuristic:lookahead        survived     score 109800 pieces  272 lines 132 lvl 14 T-spins 0 Tetrises 0 late 0 missed 2 think 6ms
+g  6s seed  7 heuristic:well-keeper      TOPPED OUT 140s score  73900 pieces  235 lines 101 lvl 11 T-spins 0 Tetrises 1 late 0 missed 1 think 0ms
+g  6s seed  7 heuristic:dellacherie      survived     score 106000 pieces  295 lines 132 lvl 14 T-spins 0 Tetrises 0 late 0 missed 5 think 0ms
+g  6s seed  7 heuristic:danger-adaptive  TOPPED OUT 158s score  83100 pieces  266 lines 114 lvl 12 T-spins 0 Tetrises 0 late 0 missed 2 think 0ms
+g  6s seed  8 solver:300+adv             survived     score  93500 pieces  213 lines 110 lvl 12 T-spins 2 Tetrises 0 late 0 missed 1 think 169ms
+g  6s seed  8 heuristic:lookahead        survived     score 116600 pieces  277 lines 134 lvl 14 T-spins 0 Tetrises 1 late 0 missed 1 think 6ms
+g  6s seed  8 heuristic:well-keeper      TOPPED OUT 112s score  46400 pieces  204 lines  83 lvl 9 T-spins 0 Tetrises 1 late 0 missed 0 think 0ms
+g  6s seed  8 heuristic:dellacherie      survived     score 118900 pieces  286 lines 139 lvl 14 T-spins 0 Tetrises 0 late 0 missed 2 think 0ms
+g  6s seed  8 heuristic:danger-adaptive  TOPPED OUT 75s score  16200 pieces  125 lines  45 lvl 5 T-spins 0 Tetrises 1 late 0 missed 0 think 0ms
+g  4s seed  1 solver:300+adv             survived     score 102300 pieces  227 lines 122 lvl 13 T-spins 4 Tetrises 0 late 0 missed 4 think 150ms
+g  4s seed  1 heuristic:lookahead        TOPPED OUT 126s score  53500 pieces  197 lines  92 lvl 10 T-spins 0 Tetrises 0 late 0 missed 5 think 7ms
+g  4s seed  1 heuristic:well-keeper      TOPPED OUT 73s score  20500 pieces  134 lines  54 lvl 6 T-spins 0 Tetrises 0 late 0 missed 0 think 0ms
+g  4s seed  1 heuristic:dellacherie      TOPPED OUT 88s score  29300 pieces  155 lines  65 lvl 7 T-spins 0 Tetrises 0 late 0 missed 1 think 0ms
+g  4s seed  1 heuristic:danger-adaptive  TOPPED OUT 73s score  18700 pieces  135 lines  54 lvl 6 T-spins 0 Tetrises 0 late 0 missed 0 think 0ms
+g  4s seed  2 solver:300+adv             survived     score 113300 pieces  231 lines 127 lvl 13 T-spins 1 Tetrises 0 late 0 missed 1 think 162ms
+g  4s seed  2 heuristic:lookahead        survived     score 145200 pieces  288 lines 149 lvl 15 T-spins 0 Tetrises 0 late 0 missed 3 think 6ms
+g  4s seed  2 heuristic:well-keeper      TOPPED OUT 123s score  55000 pieces  195 lines  89 lvl 9 T-spins 0 Tetrises 1 late 0 missed 1 think 0ms
+g  4s seed  2 heuristic:dellacherie      TOPPED OUT 126s score  65000 pieces  219 lines 100 lvl 11 T-spins 0 Tetrises 0 late 0 missed 4 think 0ms
+g  4s seed  2 heuristic:danger-adaptive  TOPPED OUT 111s score  41100 pieces  169 lines  76 lvl 8 T-spins 0 Tetrises 0 late 0 missed 0 think 0ms
+g  4s seed  3 solver:300+adv             survived     score 116000 pieces  227 lines 125 lvl 13 T-spins 3 Tetrises 0 late 0 missed 3 think 173ms
+g  4s seed  3 heuristic:lookahead        survived     score 164000 pieces  326 lines 159 lvl 16 T-spins 0 Tetrises 0 late 0 missed 7 think 6ms
+g  4s seed  3 heuristic:well-keeper      TOPPED OUT 67s score  15100 pieces  109 lines  43 lvl 5 T-spins 0 Tetrises 2 late 0 missed 0 think 0ms
+g  4s seed  3 heuristic:dellacherie      survived     score 165500 pieces  303 lines 156 lvl 16 T-spins 0 Tetrises 2 late 0 missed 5 think 0ms
+g  4s seed  3 heuristic:danger-adaptive  TOPPED OUT 85s score  22400 pieces  134 lines  56 lvl 6 T-spins 0 Tetrises 1 late 0 missed 0 think 0ms
+g  4s seed  4 solver:300+adv             survived     score 114900 pieces  230 lines 125 lvl 13 T-spins 2 Tetrises 0 late 0 missed 2 think 162ms
+g  4s seed  4 heuristic:lookahead        survived     score 133800 pieces  291 lines 147 lvl 15 T-spins 0 Tetrises 0 late 0 missed 6 think 6ms
+g  4s seed  4 heuristic:well-keeper      TOPPED OUT 127s score  78900 pieces  244 lines 109 lvl 11 T-spins 0 Tetrises 0 late 0 missed 2 think 0ms
+g  4s seed  4 heuristic:dellacherie      TOPPED OUT 99s score  39700 pieces  180 lines  78 lvl 8 T-spins 0 Tetrises 0 late 0 missed 1 think 0ms
+g  4s seed  4 heuristic:danger-adaptive  TOPPED OUT 101s score  37900 pieces  173 lines  75 lvl 8 T-spins 0 Tetrises 0 late 0 missed 0 think 0ms
+g  4s seed  5 solver:300+adv             survived     score 114900 pieces  215 lines 123 lvl 13 T-spins 3 Tetrises 0 late 0 missed 0 think 183ms
+g  4s seed  5 heuristic:lookahead        survived     score 138100 pieces  303 lines 149 lvl 15 T-spins 0 Tetrises 1 late 0 missed 7 think 6ms
+g  4s seed  5 heuristic:well-keeper      TOPPED OUT 111s score  55000 pieces  205 lines  90 lvl 10 T-spins 0 Tetrises 0 late 0 missed 1 think 0ms
+g  4s seed  5 heuristic:dellacherie      TOPPED OUT 133s score  69400 pieces  224 lines 103 lvl 11 T-spins 0 Tetrises 0 late 0 missed 4 think 0ms
+g  4s seed  5 heuristic:danger-adaptive  TOPPED OUT 46s score   4800 pieces   76 lines  25 lvl 3 T-spins 0 Tetrises 0 late 0 missed 0 think 0ms
+g  4s seed  6 solver:300+adv             survived     score 112100 pieces  230 lines 130 lvl 14 T-spins 2 Tetrises 1 late 0 missed 2 think 157ms
+g  4s seed  6 heuristic:lookahead        survived     score 146500 pieces  310 lines 152 lvl 16 T-spins 0 Tetrises 0 late 0 missed 9 think 6ms
+g  4s seed  6 heuristic:well-keeper      TOPPED OUT 140s score  96700 pieces  265 lines 121 lvl 13 T-spins 0 Tetrises 0 late 0 missed 6 think 0ms
+g  4s seed  6 heuristic:dellacherie      TOPPED OUT 156s score  89600 pieces  253 lines 120 lvl 13 T-spins 0 Tetrises 0 late 0 missed 6 think 0ms
+g  4s seed  6 heuristic:danger-adaptive  TOPPED OUT 80s score  19100 pieces  134 lines  55 lvl 6 T-spins 0 Tetrises 0 late 0 missed 0 think 0ms
+g  4s seed  7 solver:300+adv             survived     score 113200 pieces  236 lines 132 lvl 14 T-spins 0 Tetrises 1 late 0 missed 2 think 142ms
+g  4s seed  7 heuristic:lookahead        TOPPED OUT 170s score 109800 pieces  280 lines 133 lvl 14 T-spins 0 Tetrises 0 late 0 missed 10 think 5ms
+g  4s seed  7 heuristic:well-keeper      TOPPED OUT 85s score  27400 pieces  149 lines  63 lvl 7 T-spins 0 Tetrises 0 late 0 missed 0 think 0ms
+g  4s seed  7 heuristic:dellacherie      TOPPED OUT 136s score  66700 pieces  223 lines 103 lvl 11 T-spins 0 Tetrises 0 late 0 missed 2 think 0ms
+g  4s seed  7 heuristic:danger-adaptive  TOPPED OUT 91s score  30700 pieces  155 lines  66 lvl 7 T-spins 0 Tetrises 1 late 0 missed 0 think 0ms
+g  4s seed  8 solver:300+adv             survived     score 143900 pieces  290 lines 148 lvl 15 T-spins 3 Tetrises 0 late 0 missed 5 think 97ms
+g  4s seed  8 heuristic:lookahead        survived     score 135300 pieces  276 lines 143 lvl 15 T-spins 0 Tetrises 0 late 0 missed 6 think 5ms
+g  4s seed  8 heuristic:well-keeper      TOPPED OUT 97s score  40000 pieces  182 lines  78 lvl 8 T-spins 0 Tetrises 0 late 0 missed 0 think 0ms
+g  4s seed  8 heuristic:dellacherie      TOPPED OUT 104s score  45900 pieces  189 lines  83 lvl 9 T-spins 0 Tetrises 0 late 0 missed 0 think 0ms
+g  4s seed  8 heuristic:danger-adaptive  TOPPED OUT 69s score  14300 pieces  112 lines  45 lvl 5 T-spins 0 Tetrises 1 late 0 missed 0 think 0ms
+g  3s seed  1 solver:300+adv             TOPPED OUT 170s score 132800 pieces  248 lines 134 lvl 14 T-spins 3 Tetrises 0 late 0 missed 4 think 110ms
+g  3s seed  1 heuristic:lookahead        TOPPED OUT 176s score 151300 pieces  301 lines 157 lvl 16 T-spins 0 Tetrises 0 late 0 missed 9 think 5ms
+g  3s seed  1 heuristic:well-keeper      TOPPED OUT 73s score  22400 pieces  131 lines  58 lvl 6 T-spins 0 Tetrises 1 late 0 missed 0 think 0ms
+g  3s seed  1 heuristic:dellacherie      TOPPED OUT 63s score  15500 pieces  110 lines  46 lvl 5 T-spins 0 Tetrises 0 late 0 missed 0 think 0ms
+g  3s seed  1 heuristic:danger-adaptive  TOPPED OUT 44s score   5700 pieces   76 lines  27 lvl 3 T-spins 0 Tetrises 0 late 0 missed 0 think 0ms
+g  3s seed  2 solver:300+adv             TOPPED OUT 150s score 125500 pieces  245 lines 129 lvl 13 T-spins 4 Tetrises 1 late 0 missed 6 think 82ms
+g  3s seed  2 heuristic:lookahead        TOPPED OUT 177s score 174900 pieces  312 lines 163 lvl 17 T-spins 0 Tetrises 0 late 0 missed 15 think 5ms
+g  3s seed  2 heuristic:well-keeper      TOPPED OUT 51s score   9600 pieces   86 lines  34 lvl 4 T-spins 0 Tetrises 1 late 0 missed 0 think 0ms
+g  3s seed  2 heuristic:dellacherie      TOPPED OUT 65s score  16000 pieces  112 lines  48 lvl 5 T-spins 0 Tetrises 0 late 0 missed 0 think 0ms
+g  3s seed  2 heuristic:danger-adaptive  TOPPED OUT 48s score   7600 pieces   81 lines  30 lvl 4 T-spins 0 Tetrises 1 late 0 missed 0 think 0ms
+g  3s seed  3 solver:300+adv             survived     score 159700 pieces  282 lines 152 lvl 16 T-spins 2 Tetrises 0 late 0 missed 9 think 97ms
+g  3s seed  3 heuristic:lookahead        TOPPED OUT 102s score  48000 pieces  170 lines  83 lvl 9 T-spins 0 Tetrises 0 late 0 missed 0 think 5ms
+g  3s seed  3 heuristic:well-keeper      TOPPED OUT 86s score  32500 pieces  149 lines  68 lvl 7 T-spins 0 Tetrises 0 late 0 missed 0 think 0ms
+g  3s seed  3 heuristic:dellacherie      TOPPED OUT 93s score  30900 pieces  142 lines  68 lvl 7 T-spins 0 Tetrises 0 late 0 missed 0 think 0ms
+g  3s seed  3 heuristic:danger-adaptive  TOPPED OUT 67s score  13100 pieces  103 lines  45 lvl 5 T-spins 0 Tetrises 0 late 0 missed 0 think 0ms
+g  3s seed  4 solver:300+adv             survived     score 141200 pieces  260 lines 145 lvl 15 T-spins 4 Tetrises 0 late 0 missed 9 think 104ms
+g  3s seed  4 heuristic:lookahead        TOPPED OUT 169s score 158700 pieces  297 lines 153 lvl 16 T-spins 0 Tetrises 0 late 0 missed 8 think 4ms
+g  3s seed  4 heuristic:well-keeper      TOPPED OUT 83s score  34300 pieces  152 lines  69 lvl 7 T-spins 0 Tetrises 0 late 0 missed 0 think 0ms
+g  3s seed  4 heuristic:dellacherie      TOPPED OUT 88s score  33600 pieces  150 lines  71 lvl 8 T-spins 0 Tetrises 0 late 0 missed 1 think 0ms
+g  3s seed  4 heuristic:danger-adaptive  TOPPED OUT 52s score   8400 pieces   85 lines  34 lvl 4 T-spins 0 Tetrises 0 late 0 missed 0 think 0ms
+g  3s seed  5 solver:300+adv             TOPPED OUT 174s score 123100 pieces  254 lines 138 lvl 14 T-spins 0 Tetrises 0 late 0 missed 9 think 108ms
+g  3s seed  5 heuristic:lookahead        TOPPED OUT 153s score 108300 pieces  258 lines 133 lvl 14 T-spins 0 Tetrises 2 late 0 missed 9 think 5ms
+g  3s seed  5 heuristic:well-keeper      TOPPED OUT 72s score  24300 pieces  132 lines  59 lvl 6 T-spins 0 Tetrises 0 late 0 missed 0 think 0ms
+g  3s seed  5 heuristic:dellacherie      TOPPED OUT 100s score  45700 pieces  176 lines  84 lvl 9 T-spins 0 Tetrises 0 late 0 missed 0 think 0ms
+g  3s seed  5 heuristic:danger-adaptive  TOPPED OUT 68s score  15900 pieces  113 lines  49 lvl 5 T-spins 0 Tetrises 0 late 0 missed 0 think 0ms
+g  3s seed  6 solver:300+adv             TOPPED OUT 150s score  91800 pieces  213 lines 113 lvl 12 T-spins 2 Tetrises 0 late 0 missed 2 think 118ms
+g  3s seed  6 heuristic:lookahead        TOPPED OUT 140s score  93900 pieces  235 lines 120 lvl 13 T-spins 0 Tetrises 0 late 0 missed 2 think 5ms
+g  3s seed  6 heuristic:well-keeper      TOPPED OUT 47s score   8600 pieces   85 lines  31 lvl 4 T-spins 0 Tetrises 0 late 0 missed 0 think 0ms
+g  3s seed  6 heuristic:dellacherie      TOPPED OUT 127s score  79900 pieces  219 lines 110 lvl 12 T-spins 0 Tetrises 1 late 0 missed 3 think 0ms
+g  3s seed  6 heuristic:danger-adaptive  TOPPED OUT 50s score   7700 pieces   84 lines  32 lvl 4 T-spins 0 Tetrises 0 late 0 missed 0 think 0ms
+g  3s seed  7 solver:300+adv             TOPPED OUT 90s score  26200 pieces  125 lines  61 lvl 7 T-spins 0 Tetrises 0 late 0 missed 0 think 123ms
+g  3s seed  7 heuristic:lookahead        TOPPED OUT 148s score 111800 pieces  259 lines 132 lvl 14 T-spins 0 Tetrises 0 late 0 missed 7 think 4ms
+g  3s seed  7 heuristic:well-keeper      TOPPED OUT 49s score   7700 pieces   82 lines  31 lvl 4 T-spins 0 Tetrises 0 late 0 missed 0 think 0ms
+g  3s seed  7 heuristic:dellacherie      TOPPED OUT 93s score  36000 pieces  156 lines  74 lvl 8 T-spins 0 Tetrises 0 late 0 missed 0 think 0ms
+g  3s seed  7 heuristic:danger-adaptive  TOPPED OUT 50s score   8200 pieces   83 lines  32 lvl 4 T-spins 0 Tetrises 0 late 0 missed 0 think 0ms
+g  3s seed  8 solver:300+adv             TOPPED OUT 72s score  15700 pieces  101 lines  46 lvl 5 T-spins 0 Tetrises 0 late 0 missed 0 think 122ms
+g  3s seed  8 heuristic:lookahead        TOPPED OUT 121s score  64200 pieces  202 lines 101 lvl 11 T-spins 0 Tetrises 0 late 0 missed 4 think 4ms
+g  3s seed  8 heuristic:well-keeper      TOPPED OUT 76s score  25500 pieces  131 lines  59 lvl 6 T-spins 0 Tetrises 2 late 0 missed 0 think 0ms
+g  3s seed  8 heuristic:dellacherie      TOPPED OUT 49s score   7100 pieces   83 lines  31 lvl 4 T-spins 0 Tetrises 0 late 0 missed 0 think 0ms
+g  3s seed  8 heuristic:danger-adaptive  TOPPED OUT 58s score   9800 pieces   93 lines  38 lvl 4 T-spins 0 Tetrises 0 late 0 missed 0 think 0ms
+g  2s seed  1 solver:300+adv             TOPPED OUT 85s score  33600 pieces  117 lines  68 lvl 7 T-spins 2 Tetrises 0 late 0 missed 1 think 121ms
+g  2s seed  1 heuristic:lookahead        TOPPED OUT 52s score  12400 pieces   86 lines  41 lvl 5 T-spins 0 Tetrises 0 late 0 missed 0 think 4ms
+g  2s seed  1 heuristic:well-keeper      TOPPED OUT 36s score   5800 pieces   66 lines  26 lvl 3 T-spins 0 Tetrises 0 late 0 missed 0 think 0ms
+g  2s seed  1 heuristic:dellacherie      TOPPED OUT 32s score   3500 pieces   53 lines  20 lvl 3 T-spins 0 Tetrises 0 late 0 missed 0 think 0ms
+g  2s seed  1 heuristic:danger-adaptive  TOPPED OUT 28s score   3100 pieces   50 lines  17 lvl 2 T-spins 0 Tetrises 1 late 0 missed 0 think 0ms
+g  2s seed  2 solver:300+adv             TOPPED OUT 65s score  20600 pieces   91 lines  48 lvl 5 T-spins 3 Tetrises 0 late 0 missed 0 think 124ms
+g  2s seed  2 heuristic:lookahead        TOPPED OUT 46s score   9200 pieces   73 lines  34 lvl 4 T-spins 0 Tetrises 0 late 0 missed 0 think 4ms
+g  2s seed  2 heuristic:well-keeper      TOPPED OUT 45s score   9900 pieces   77 lines  35 lvl 4 T-spins 0 Tetrises 0 late 0 missed 0 think 0ms
+g  2s seed  2 heuristic:dellacherie      TOPPED OUT 42s score   7400 pieces   71 lines  31 lvl 4 T-spins 0 Tetrises 0 late 0 missed 0 think 0ms
+g  2s seed  2 heuristic:danger-adaptive  TOPPED OUT 40s score   6800 pieces   67 lines  29 lvl 3 T-spins 0 Tetrises 0 late 0 missed 0 think 0ms
+g  2s seed  3 solver:300+adv             TOPPED OUT 66s score  18900 pieces   87 lines  48 lvl 5 T-spins 0 Tetrises 0 late 0 missed 0 think 130ms
+g  2s seed  3 heuristic:lookahead        TOPPED OUT 73s score  29900 pieces  118 lines  64 lvl 7 T-spins 0 Tetrises 0 late 0 missed 1 think 5ms
+g  2s seed  3 heuristic:well-keeper      TOPPED OUT 40s score   6500 pieces   69 lines  29 lvl 3 T-spins 0 Tetrises 0 late 0 missed 0 think 0ms
+g  2s seed  3 heuristic:dellacherie      TOPPED OUT 40s score   6900 pieces   69 lines  28 lvl 3 T-spins 0 Tetrises 0 late 0 missed 0 think 0ms
+g  2s seed  3 heuristic:danger-adaptive  TOPPED OUT 40s score   6200 pieces   65 lines  27 lvl 3 T-spins 0 Tetrises 0 late 0 missed 0 think 0ms
+g  2s seed  4 solver:300+adv             TOPPED OUT 76s score  35400 pieces  121 lines  65 lvl 7 T-spins 2 Tetrises 1 late 0 missed 0 think 87ms
+g  2s seed  4 heuristic:lookahead        TOPPED OUT 78s score  35300 pieces  129 lines  71 lvl 8 T-spins 0 Tetrises 0 late 0 missed 0 think 4ms
+g  2s seed  4 heuristic:well-keeper      TOPPED OUT 26s score   2000 pieces   46 lines  13 lvl 2 T-spins 0 Tetrises 0 late 0 missed 0 think 0ms
+g  2s seed  4 heuristic:dellacherie      TOPPED OUT 42s score   7000 pieces   71 lines  31 lvl 4 T-spins 0 Tetrises 0 late 0 missed 0 think 0ms
+g  2s seed  4 heuristic:danger-adaptive  TOPPED OUT 36s score   5500 pieces   63 lines  25 lvl 3 T-spins 0 Tetrises 0 late 0 missed 0 think 0ms
+g  2s seed  5 solver:300+adv             TOPPED OUT 78s score  28700 pieces  108 lines  61 lvl 7 T-spins 5 Tetrises 0 late 0 missed 0 think 117ms
+g  2s seed  5 heuristic:lookahead        TOPPED OUT 51s score  12600 pieces   83 lines  40 lvl 5 T-spins 0 Tetrises 1 late 0 missed 0 think 4ms
+g  2s seed  5 heuristic:well-keeper      TOPPED OUT 42s score   7300 pieces   73 lines  31 lvl 4 T-spins 0 Tetrises 0 late 0 missed 0 think 0ms
+g  2s seed  5 heuristic:dellacherie      TOPPED OUT 56s score  15800 pieces   94 lines  47 lvl 5 T-spins 0 Tetrises 0 late 0 missed 0 think 0ms
+g  2s seed  5 heuristic:danger-adaptive  TOPPED OUT 31s score   2900 pieces   52 lines  18 lvl 2 T-spins 0 Tetrises 0 late 0 missed 0 think 0ms
+g  2s seed  6 solver:300+adv             TOPPED OUT 76s score  30500 pieces  114 lines  63 lvl 7 T-spins 2 Tetrises 0 late 0 missed 0 think 101ms
+g  2s seed  6 heuristic:lookahead        TOPPED OUT 88s score  43900 pieces  143 lines  80 lvl 9 T-spins 0 Tetrises 0 late 0 missed 0 think 5ms
+g  2s seed  6 heuristic:well-keeper      TOPPED OUT 32s score   3800 pieces   58 lines  20 lvl 3 T-spins 0 Tetrises 0 late 0 missed 0 think 0ms
+g  2s seed  6 heuristic:dellacherie      TOPPED OUT 62s score  18900 pieces  105 lines  53 lvl 6 T-spins 0 Tetrises 0 late 0 missed 0 think 0ms
+g  2s seed  6 heuristic:danger-adaptive  TOPPED OUT 36s score   4900 pieces   61 lines  24 lvl 3 T-spins 0 Tetrises 0 late 0 missed 0 think 0ms
+g  2s seed  7 solver:300+adv             TOPPED OUT 66s score  18700 pieces   93 lines  50 lvl 6 T-spins 0 Tetrises 0 late 0 missed 0 think 111ms
+g  2s seed  7 heuristic:lookahead        TOPPED OUT 47s score  10900 pieces   83 lines  37 lvl 4 T-spins 0 Tetrises 0 late 0 missed 0 think 4ms
+g  2s seed  7 heuristic:well-keeper      TOPPED OUT 48s score  10600 pieces   83 lines  38 lvl 4 T-spins 0 Tetrises 0 late 0 missed 0 think 0ms
+g  2s seed  7 heuristic:dellacherie      TOPPED OUT 54s score  14400 pieces   92 lines  44 lvl 5 T-spins 0 Tetrises 0 late 0 missed 0 think 0ms
+g  2s seed  7 heuristic:danger-adaptive  TOPPED OUT 34s score   4900 pieces   55 lines  23 lvl 3 T-spins 0 Tetrises 0 late 0 missed 0 think 0ms
+g  2s seed  8 solver:300+adv             TOPPED OUT 66s score  18700 pieces   94 lines  50 lvl 6 T-spins 0 Tetrises 1 late 0 missed 0 think 117ms
+g  2s seed  8 heuristic:lookahead        TOPPED OUT 65s score  22300 pieces  106 lines  55 lvl 6 T-spins 0 Tetrises 0 late 0 missed 0 think 5ms
+g  2s seed  8 heuristic:well-keeper      TOPPED OUT 33s score   3900 pieces   57 lines  21 lvl 3 T-spins 0 Tetrises 0 late 0 missed 0 think 0ms
+g  2s seed  8 heuristic:dellacherie      TOPPED OUT 38s score   5800 pieces   66 lines  26 lvl 3 T-spins 0 Tetrises 0 late 0 missed 0 think 0ms
+g  2s seed  8 heuristic:danger-adaptive  TOPPED OUT 26s score   1800 pieces   42 lines  13 lvl 2 T-spins 0 Tetrises 0 late 0 missed 0 think 0ms

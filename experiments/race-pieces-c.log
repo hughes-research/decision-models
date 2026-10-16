@@ -1,0 +1,24 @@
+g 8 seed  1 solver:300+adv+strict      survived     score  88800 pieces  223 lines 113 lvl 12 T-spins 1 Tetrises 0 late 0 missed 0 think 142ms
+g 8 seed  2 solver:300+adv+strict      survived     score 119800 pieces  235 lines 119 lvl 12 T-spins 6 Tetrises 0 late 0 missed 0 think 138ms
+g 8 seed  3 solver:300+adv+strict      survived     score  93900 pieces  223 lines 109 lvl 11 T-spins 3 Tetrises 0 late 0 missed 0 think 144ms
+g 8 seed  4 solver:300+adv+strict      survived     score  83900 pieces  217 lines 107 lvl 11 T-spins 4 Tetrises 0 late 0 missed 1 think 145ms
+g 8 seed  5 solver:300+adv+strict      survived     score  87400 pieces  222 lines 111 lvl 12 T-spins 3 Tetrises 0 late 0 missed 0 think 148ms
+g 8 seed  6 solver:300+adv+strict      survived     score 107800 pieces  221 lines 110 lvl 12 T-spins 5 Tetrises 1 late 0 missed 0 think 148ms
+g 8 seed  7 solver:300+adv+strict      survived     score  94900 pieces  218 lines 110 lvl 12 T-spins 4 Tetrises 1 late 0 missed 0 think 149ms
+g 8 seed  8 solver:300+adv+strict      survived     score  91200 pieces  219 lines 110 lvl 12 T-spins 5 Tetrises 0 late 0 missed 0 think 152ms
+g 5 seed  1 solver:300+adv+strict      survived     score 135100 pieces  242 lines 137 lvl 14 T-spins 3 Tetrises 0 late 0 missed 3 think 130ms
+g 5 seed  2 solver:300+adv+strict      TOPPED OUT 180s score 107100 pieces  247 lines 127 lvl 13 T-spins 1 Tetrises 0 late 0 missed 7 think 120ms
+g 5 seed  3 solver:300+adv+strict      TOPPED OUT 180s score 128800 pieces  266 lines 138 lvl 14 T-spins 3 Tetrises 0 late 0 missed 8 think 109ms
+g 5 seed  4 solver:300+adv+strict      survived     score 110600 pieces  230 lines 122 lvl 13 T-spins 6 Tetrises 0 late 0 missed 2 think 136ms
+g 5 seed  5 solver:300+adv+strict      survived     score  99100 pieces  222 lines 124 lvl 13 T-spins 0 Tetrises 0 late 0 missed 0 think 143ms
+g 5 seed  6 solver:300+adv+strict      TOPPED OUT 142s score  69100 pieces  200 lines  99 lvl 10 T-spins 1 Tetrises 0 late 0 missed 2 think 126ms
+g 5 seed  7 solver:300+adv+strict      TOPPED OUT 178s score 113400 pieces  241 lines 123 lvl 13 T-spins 4 Tetrises 0 late 0 missed 6 think 128ms
+g 5 seed  8 solver:300+adv+strict      survived     score 115000 pieces  254 lines 134 lvl 14 T-spins 1 Tetrises 0 late 0 missed 7 think 118ms
+g 3 seed  1 solver:300+adv+strict      TOPPED OUT 72s score  19800 pieces   96 lines  50 lvl 6 T-spins 0 Tetrises 0 late 0 missed 0 think 131ms
+g 3 seed  2 solver:300+adv+strict      TOPPED OUT 87s score  29000 pieces  114 lines  63 lvl 7 T-spins 1 Tetrises 0 late 0 missed 0 think 133ms
+g 3 seed  3 solver:300+adv+strict      TOPPED OUT 107s score  48200 pieces  139 lines  81 lvl 9 T-spins 1 Tetrises 0 late 0 missed 1 think 143ms
+g 3 seed  4 solver:300+adv+strict      TOPPED OUT 72s score  29300 pieces  105 lines  56 lvl 6 T-spins 2 Tetrises 0 late 0 missed 0 think 116ms
+g 3 seed  5 solver:300+adv+strict      TOPPED OUT 113s score  55000 pieces  147 lines  85 lvl 9 T-spins 2 Tetrises 0 late 0 missed 0 think 134ms
+g 3 seed  6 solver:300+adv+strict      TOPPED OUT 53s score  10200 pieces   74 lines  35 lvl 4 T-spins 0 Tetrises 0 late 0 missed 0 think 123ms
+g 3 seed  7 solver:300+adv+strict      TOPPED OUT 83s score  25800 pieces  109 lines  60 lvl 7 T-spins 2 Tetrises 1 late 0 missed 0 think 132ms
+g 3 seed  8 solver:300+adv+strict      TOPPED OUT 55s score  11900 pieces   78 lines  37 lvl 4 T-spins 0 Tetrises 0 late 0 missed 0 think 112ms

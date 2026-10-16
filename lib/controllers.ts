@@ -25,7 +25,7 @@ export function label(cfg: BoardCfg): string {
 export type Ctx = {
   pieceId: number; board: Board; piece: PieceName; next: PieceName; active: PieceState; reach: Placement[];
   level: number; advanced: boolean; gravity: boolean; gravityMs: number; lockDelayMs: number;
-  garbageEvery: number; piecesUntilGarbage: number; bagRemainder: PieceName[]; rng: () => number;
+  garbageMs: number; msUntilGarbage: number; pendingGarbage: number; avgPieceMs: number; bagRemainder: PieceName[]; rng: () => number;
 };
 
 export type Info =
@@ -88,8 +88,8 @@ function solver(cfg: BoardCfg, t: Transports): Controller {
       active: { piece: ctx.piece, ...ctx.active },
       next: [ctx.next],
       bagRemainder: cfg.strictInfo ? null : ctx.bagRemainder,
-      rules: { advanced: ctx.advanced, level: ctx.level, gravityMsPerRow: ctx.gravity ? ctx.gravityMs : 0, lockDelayMs: ctx.lockDelayMs, garbageEvery: ctx.garbageEvery },
-      state: { piecesUntilGarbage: ctx.piecesUntilGarbage },
+      rules: { advanced: ctx.advanced, level: ctx.level, gravityMsPerRow: ctx.gravity ? ctx.gravityMs : 0, lockDelayMs: ctx.lockDelayMs, garbageMs: Math.round(ctx.garbageMs) },
+      state: { pendingGarbage: ctx.pendingGarbage, msUntilGarbage: ctx.msUntilGarbage, avgPieceMs: ctx.avgPieceMs },
       timing: { budgetMs: cfg.budgetMs },
     }, signal);
     // Map the solver's cells (and spin) to this engine's keys via the board they produce, so the two engines

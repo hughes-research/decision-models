@@ -115,7 +115,7 @@ def make_scenarios(rem: list[str] | None, length: int, count: int, rng: random.R
     return out
 
 
-def beam(board: Board, seq: list[str], garbage_at: dict[int, int], width: int, adv: bool, clock: Clock) -> tuple[float, bool]:
+def beam(board: Board, seq: list[str], garbage_at: dict[int, list[int]], width: int, adv: bool, clock: Clock) -> tuple[float, bool]:
     """Best total score of the next len(seq) placements in one scenario (beam search), and whether every line died."""
     frontier: list[tuple[Board, float]] = [(board, 0.0)]
     w = 1.0
@@ -130,10 +130,12 @@ def beam(board: Board, seq: list[str], garbage_at: dict[int, int], width: int, a
                 moves = [(nb, lines, landing, eroded, "none") for nb, lines, landing, eroded in drops(b, piece)]
             for nb, lines, landing, eroded, spin in moves:
                 v = acc + w * (dell(nb, landing, eroded) + bonus(lines, spin, nb, safe))
-                if d in garbage_at:
-                    nb = add_garbage(nb, garbage_at[d])
+                for gap in garbage_at.get(d, ()):  # rows that land after this placement
+                    nb = add_garbage(nb, gap)
                     if nb is None:
-                        continue
+                        break
+                if nb is None:
+                    continue
                 if d + 1 < len(seq) and not fits(nb, seq[d + 1], *SPAWN[seq[d + 1]]):
                     continue  # the next piece cannot spawn: top-out
                 if v > kids.get(nb, -1e18):
@@ -184,8 +186,20 @@ def solve(req: dict) -> dict:
     nxt = (req.get("next") or [None])[0]
     rem = req.get("bagRemainder")
     adv = bool(rules.get("advanced", False))
-    every, until = int(rules.get("garbageEvery", 0)), int(state.get("piecesUntilGarbage", 0))
-    pending = 1 if every and until <= 2 else 0
+    # Garbage runs on a clock: rows queued now land when this piece locks; one more row every garbageMs after
+    # msUntilGarbage. Lock j (1 = this piece) happens about j * avgPieceMs from now at this board's pace.
+    g_ms = float(rules.get("garbageMs", 0))
+    queued = int(state.get("pendingGarbage", 0))
+    until_ms = float(state.get("msUntilGarbage", g_ms))
+    piece_ms = max(50.0, float(state.get("avgPieceMs", 1000)))
+
+    def arrived(t: float) -> int:  # rows queued between now and t ms from now
+        return 0 if not g_ms or t < until_ms else 1 + int((t - until_ms) // g_ms)
+
+    def rows_at(j: int) -> int:  # rows pushed in right after lock j
+        return (queued if j == 1 else 0) + arrived(j * piece_ms) - arrived((j - 1) * piece_ms)
+
+    pending = rows_at(1) + rows_at(2)
 
     # Anytime under gravity: thinking time is fall time, so think for at most a quarter of the fall.
     budget = float(timing.get("budgetMs", 300))
@@ -203,10 +217,12 @@ def solve(req: dict) -> dict:
     safe = is_attack(analyze(b), pending)
     weights = dict(CONSTRAINTS)
     rng = random.Random(zlib.crc32(f"{hex_board(b)}{piece}{nxt}{rem}".encode()))
-    gap_now = rng.randrange(W) if every and until == 1 else None  # garbage lands as soon as this piece locks
+    gaps_now = [rng.randrange(W) for _ in range(rows_at(1))]  # garbage that lands as soon as this piece locks
     cands = []
     for lk in locks:
-        root = lk.board if gap_now is None else add_garbage(lk.board, gap_now)
+        root: Board | None = lk.board
+        for gap in gaps_now:
+            root = add_garbage(root, gap) if root is not None else None
         v = violations(b, lk, root, pending)
         cands.append(Cand(lk, score(b, lk, safe), v, sum(weights[x] for x in v), root))
     best_rank = min(c.rank for c in cands)
@@ -237,7 +253,7 @@ def solve(req: dict) -> dict:
     # Bag scenarios + beam, successive halving over the strongest first moves.
     length, width, count, keep = settings(budget)
     scen = make_scenarios(rem, length, count, rng)
-    gaps = [{d: rng.randrange(W) for d in range(length + 1) if every and d + 2 >= until and (d + 2 - until) % every == 0} for _ in scen]
+    gaps = [{d: [rng.randrange(W) for _ in range(rows_at(d + 2))] for d in range(length + 1) if rows_at(d + 2)} for _ in scen]
     alive = pool[:keep] if finished else []
     n = min(4, len(scen))
     done = 0

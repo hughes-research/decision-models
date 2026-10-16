@@ -1,15 +1,17 @@
 // Real-time game state: gravity, lock delay, scoring (guideline + T-spins), garbage, levels, top-out.
-// Pure and deterministic: time only moves through tick(), so the browser and headless scripts share it.
+// Pure and deterministic: time only moves through tick() and passTime(), so the browser and headless scripts share it.
 import { W, PIECES, PIECE_ID, GARBAGE, LINE_SCORE, emptyBoard, makeBag, mulberry32, clearLines, type Board, type Cells, type PieceName, type PieceState, type Action, type Spin, type Placement } from "./tetris.ts";
 import { spawnState, fitsState, cellsOf, step, tspin, grounded, hardDrop, reachable } from "./srs.ts";
 
 export type EngineConfig = {
   gravity: boolean; // false = turn-based: the piece waits at spawn for its controller
   startLevel: number;
-  garbageEvery: number; // pieces between garbage rows; 0 = off
+  // One garbage row every garbageMs of game time (0 = off), the same on every board. Rows queue up and are pushed
+  // in at the next lock (the versus-Tetris rule), so a slow controller cannot dodge garbage by placing fewer pieces.
+  garbageMs: number;
   lockDelayMs: number;
 };
-export const DEFAULT_CONFIG: EngineConfig = { gravity: true, startLevel: 1, garbageEvery: 0, lockDelayMs: 500 };
+export const DEFAULT_CONFIG: EngineConfig = { gravity: true, startLevel: 1, garbageMs: 0, lockDelayMs: 500 };
 
 // Guideline gravity: ms per row = 1000 * (0.8 - (L-1) * 0.007)^(L-1), levels 1..15.
 export const GRAVITY_MS = Array.from({ length: 15 }, (_, i) => Math.round(1000 * Math.pow(0.8 - i * 0.007, i)));
@@ -26,11 +28,12 @@ export type Game = {
   fallMs: number; lockMs: number; resets: number; lowest: number; lastKick: number; // lastKick -1 = last move was not a rotation
   score: number; lines: number; level: number; pieces: number; over: boolean;
   tspins: number; tetrises: number; garbageRows: number;
+  garbageClock: number; pendingGarbage: number; // ms toward the next row; rows queued for the next lock
 };
 
 export type LockEvent = {
   pieceId: number; piece: PieceName; cells: Cells; placed: Board; cleared: number[];
-  lines: number; spin: Spin; points: number; garbage: boolean; forced: boolean; // forced = locked by the lock delay
+  lines: number; spin: Spin; points: number; garbage: number; forced: boolean; // garbage = rows pushed in; forced = locked by the lock delay
 };
 
 function deal(g: Game): PieceName {
@@ -54,13 +57,14 @@ export function createGame(cfg: EngineConfig, seed: number, board: Board = empty
     piece: "I", next: "I", active: spawnState("I"), pieceId: 0,
     fallMs: 0, lockMs: 0, resets: 0, lowest: 0, lastKick: -1,
     score: 0, lines: 0, level: cfg.startLevel, pieces: 0, over: false, tspins: 0, tetrises: 0, garbageRows: 0,
+    garbageClock: 0, pendingGarbage: 0,
   };
   g.next = deal(g);
   spawn(g);
   return g;
 }
 
-// Garbage arrives by piece count from its own RNG stream, so every board gets the same rows at the same time.
+// The k-th garbage row comes from the k-th draw of its own RNG stream, so every board gets the same rows.
 export function addGarbage(g: Game) {
   const gap = Math.floor(g.garbageRng() * W);
   if (g.board[0].some((c) => c !== 0)) g.over = true; // the stack is pushed off the top
@@ -83,8 +87,9 @@ function lock(g: Game, forced: boolean): LockEvent {
   g.board = board;
   if (spin !== "none" && lines > 0) g.tspins++;
   if (lines === 4) g.tetrises++;
-  const garbage = g.cfg.garbageEvery > 0 && g.pieces % g.cfg.garbageEvery === 0;
-  if (garbage) addGarbage(g);
+  const garbage = g.pendingGarbage;
+  for (; g.pendingGarbage > 0 && !g.over; g.pendingGarbage--) addGarbage(g);
+  g.pendingGarbage = 0;
   const event: LockEvent = { pieceId: g.pieceId, piece: g.piece, cells, placed, cleared, lines, spin, points: pts, garbage, forced };
   if (!g.over) spawn(g);
   return event;
@@ -110,6 +115,16 @@ export function act(g: Game, a: Action): { moved: boolean; lock?: LockEvent } {
   else if ((wasGrounded || grounded(g.board, g.piece, g.active)) && g.resets < MAX_RESETS) { g.resets++; g.lockMs = 0; }
   return { moved: true };
 }
+
+// The garbage clock. Called for every bit of game time (including line-clear flashes and turn-based waits),
+// so the queue depends only on time, never on how fast a board plays.
+export function passTime(g: Game, ms: number) {
+  if (g.over || !g.cfg.garbageMs) return;
+  g.garbageClock += ms;
+  while (g.garbageClock >= g.cfg.garbageMs) { g.garbageClock -= g.cfg.garbageMs; g.pendingGarbage++; }
+}
+
+export const msUntilGarbage = (g: Game) => (g.cfg.garbageMs ? g.cfg.garbageMs - g.garbageClock : 0);
 
 // Advance game time. With gravity the piece falls, and a grounded piece locks after the lock delay.
 // Returns as soon as a piece locks, so callers can ask the next piece's controller at the exact moment.

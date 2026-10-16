@@ -7,11 +7,10 @@ import { METHODS, byId, type Kind } from "@/lib/heuristics";
 import { ROTATIONS, PIECE_ID, W, H, type Board as BoardT, type Cells, type PieceName } from "@/lib/tetris";
 import type { EngineConfig } from "@/lib/engine";
 
-export const COLORS = ["", "bg-cyan-400", "bg-yellow-300", "bg-purple-500", "bg-green-500", "bg-red-500", "bg-orange-400", "bg-blue-500", "bg-zinc-500"];
 const KIND_LABEL: Record<Kind, string> = { classic: "Heuristic: classic", original: "Heuristic: original", learned: "Heuristic: learned from the model", fusion: "Heuristic: fusion (no model here)" };
 const BUDGETS = [50, 300, 1000, 2000];
 
-export type Status = { score: number; lines: number; pieces: number; over: boolean; overAt: number | null };
+export type Status = { score: number; lines: number; pieces: number; level: number; over: boolean; overAt: number | null };
 
 async function post<T>(url: string, body: unknown, signal?: AbortSignal): Promise<T> {
   const r = await fetch(url, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body), signal });
@@ -21,40 +20,77 @@ async function post<T>(url: string, body: unknown, signal?: AbortSignal): Promis
 }
 const WEB: Transports = { decide: (b, s) => post("/api/decide", b, s), solve: (b, s) => post("/api/solve", b, s) };
 
+// Blocks are vector tiles in the classic bevelled style: a bright top-left rim, a dark bottom-right rim and a
+// square face with a highlight. Shades per piece id: [face, top rim, left rim, right rim, bottom rim].
+const SHADES: Record<number, [string, string, string, string, string]> = {
+  1: ["#2e8fea", "#9ad0ff", "#63b0f7", "#1c69bd", "#124c8c"], // I light blue
+  2: ["#e3ad17", "#ffe27a", "#f5c844", "#a87b06", "#7a5703"], // O mustard
+  3: ["#b23ca9", "#f0a2ea", "#d670cd", "#7f2378", "#5c1557"], // T purple
+  4: ["#3e9d3a", "#a6e3a1", "#6fc469", "#276f24", "#1a4f18"], // S green
+  5: ["#d8343c", "#ff9ca0", "#f0646a", "#9c1f25", "#701419"], // Z red
+  6: ["#ec6b16", "#ffc27a", "#f99340", "#ab470a", "#7c3205"], // L orange
+  7: ["#2648c9", "#8ea6ff", "#5874ea", "#172f8f", "#0f2068"], // J blue
+  8: ["#6b7280", "#b4b8c2", "#8d939e", "#4b505b", "#353942"], // garbage
+};
+
+// Rendered once per page; every board, overlay and preview <use>s these symbols.
+export function TileDefs() {
+  return (
+    <svg width="0" height="0" className="absolute" aria-hidden="true">
+      <defs>
+        {Object.entries(SHADES).map(([id, [face, top, left, right, bottom]]) => (
+          <symbol key={id} id={`tile-${id}`} viewBox="0 0 10 10">
+            <polygon points="0,0 10,0 7.6,2.4 2.4,2.4" fill={top} />
+            <polygon points="0,0 2.4,2.4 2.4,7.6 0,10" fill={left} />
+            <polygon points="10,0 10,10 7.6,7.6 7.6,2.4" fill={right} />
+            <polygon points="0,10 2.4,7.6 7.6,7.6 10,10" fill={bottom} />
+            <rect x="2.4" y="2.4" width="5.2" height="5.2" fill={face} />
+            <path d="M3.1 6.9V3.1H6.9" fill="none" stroke={top} strokeWidth="0.55" opacity="0.9" />
+            <path d="M3.1 6.9H6.9V3.1" fill="none" stroke={right} strokeWidth="0.55" opacity="0.55" />
+            <rect x="0.15" y="0.15" width="9.7" height="9.7" fill="none" stroke="#000" strokeOpacity="0.45" strokeWidth="0.3" />
+          </symbol>
+        ))}
+        <pattern id="cell-grid" width="10" height="10" patternUnits="userSpaceOnUse">
+          <path d="M10 0H0V10" fill="none" stroke="#1f1f23" strokeWidth="0.6" />
+        </pattern>
+      </defs>
+    </svg>
+  );
+}
+
+const Tile = ({ id, x, y }: { id: number; x: number; y: number }) => <use href={`#tile-${id}`} x={x * 10} y={y * 10} width={10} height={10} />;
+
 const Grid = memo(function Grid({ board, flash, flashKind }: { board: BoardT; flash: number[]; flashKind: View["flashKind"] }) {
   return (
-    <div className="grid gap-px rounded bg-zinc-800 p-px" style={{ gridTemplateColumns: `repeat(${W}, 1fr)` }}>
-      {board.flatMap((row, y) => row.map((c, x) => {
-        const lit = flash.includes(y);
-        const cls = lit ? (flashKind === "clear" ? "bg-white" : "bg-zinc-300 animate-pulse") : c ? COLORS[c] : "bg-zinc-950";
-        return <div key={y * W + x} className={`aspect-square ${cls}`} />;
-      }))}
-    </div>
+    <svg viewBox={`0 0 ${W * 10} ${H * 10}`} className="block w-full rounded border border-zinc-800 bg-zinc-950" role="img" aria-label="playfield">
+      <rect width={W * 10} height={H * 10} fill="url(#cell-grid)" />
+      {board.flatMap((row, y) => row.map((c, x) => (c ? <Tile key={y * W + x} id={c} x={x} y={y} /> : null)))}
+      {flash.map((y) => (
+        <rect key={`f${y}`} y={y * 10} width={W * 10} height={10} fill={flashKind === "clear" ? "#fff" : "#d4d4d8"} opacity={0.75} className="animate-pulse" />
+      ))}
+    </svg>
   );
 });
 
 function Overlay({ view }: { view: View }) {
-  const cell = (key: string, [x, y]: [number, number], cls: string) => (
-    <div key={key} className={cls} style={{ gridColumn: x + 1, gridRow: y + 1 }} />
-  );
-  const color = view.piece ? COLORS[PIECE_ID[view.piece.name]] : "";
+  const target = view.ghost?.kind === "target";
   return (
-    <div className="pointer-events-none absolute inset-0 grid gap-px p-px" style={{ gridTemplateColumns: `repeat(${W}, 1fr)`, gridTemplateRows: `repeat(${H}, 1fr)` }}>
-      {view.ghost?.cells.map((c, i) => cell(`g${i}`, c, view.ghost!.kind === "target" ? "rounded-sm ring-2 ring-inset ring-amber-300/90" : "rounded-sm ring-1 ring-inset ring-white/35"))}
-      {view.piece?.cells.map((c, i) => cell(`p${i}`, c, `${color} rounded-[1px] shadow-[inset_0_0_0_1px_rgba(255,255,255,0.35)]`))}
-    </div>
+    <svg viewBox={`0 0 ${W * 10} ${H * 10}`} className="pointer-events-none absolute inset-0 h-full w-full" aria-hidden="true">
+      {view.ghost?.cells.map(([x, y], i) => (
+        <rect key={`g${i}`} x={x * 10 + 0.8} y={y * 10 + 0.8} width={8.4} height={8.4} rx={0.8} fill="none"
+          stroke={target ? "#fcd34d" : "#ffffff"} strokeOpacity={target ? 0.95 : 0.35} strokeWidth={target ? 1.1 : 0.7} strokeDasharray={target ? "2.2 1.4" : undefined} />
+      ))}
+      {view.piece?.cells.map(([x, y], i) => <Tile key={`p${i}`} id={PIECE_ID[view.piece!.name]} x={x} y={y} />)}
+    </svg>
   );
 }
 
 function Preview({ piece }: { piece: PieceName }) {
   const cells: Cells = ROTATIONS[piece][0];
   return (
-    <div className="grid w-12 gap-px" style={{ gridTemplateColumns: "repeat(4, 1fr)" }}>
-      {Array.from({ length: 8 }, (_, i) => {
-        const on = cells.some(([x, y]) => x === i % 4 && y === Math.floor(i / 4));
-        return <div key={i} className={`aspect-square ${on ? COLORS[PIECE_ID[piece]] : "bg-transparent"}`} />;
-      })}
-    </div>
+    <svg viewBox="0 0 40 20" className="w-12" role="img" aria-label={`next piece ${piece}`}>
+      {cells.map(([x, y]) => <Tile key={`${x},${y}`} id={PIECE_ID[piece]} x={x} y={y} />)}
+    </svg>
   );
 }
 
@@ -104,7 +140,7 @@ function Panel({ view, cfg }: { view: View; cfg: BoardCfg }) {
 function Picker({ cfg, onCfg, disabled }: { cfg: BoardCfg; onCfg: (c: BoardCfg) => void; disabled: boolean }) {
   const isModel = cfg.who.startsWith("model:");
   return (
-    <div className="flex flex-col gap-1 font-mono text-xs">
+    <div className="flex min-h-[4.5rem] flex-col gap-1 font-mono text-xs"> {/* same height for every controller kind, so the playfields line up */}
       <select value={cfg.who} disabled={disabled} aria-label="controller"
         onChange={(e) => {
           const who = e.target.value;
@@ -182,7 +218,7 @@ export const Board = memo(function Board({ index, cfg, onCfg, engine, seed, runn
       const v = viewOf(s);
       if (v.key !== key) { key = v.key; setView(v); }
       if (events.length) { // every top-out happens inside a lock, so locks are the only status changes
-        report(index, { score: s.game.score, lines: s.game.lines, pieces: s.game.pieces, over: s.game.over, overAt: s.overAt });
+        report(index, { score: s.game.score, lines: s.game.lines, pieces: s.game.pieces, level: s.game.level, over: s.game.over, overAt: s.overAt });
       }
       raf = requestAnimationFrame(frame);
     };
@@ -213,7 +249,8 @@ export const Board = memo(function Board({ index, cfg, onCfg, engine, seed, runn
         <div className="flex w-14 flex-col items-center gap-2 font-mono text-[10px] text-zinc-500">
           <span>next</span>
           <Preview piece={v.next} />
-          {v.garbageIn > 0 && <span className="mt-2 text-center">garbage in <b className="text-zinc-300">{v.garbageIn}</b></span>}
+          {v.garbageInMs !== null && <span className="mt-2 text-center">garbage in <b className="text-zinc-300">{(v.garbageInMs / 1000).toFixed(1)}s</b></span>}
+          {v.garbageQueued > 0 && <span className="text-center text-red-300" title="rows pushed in when the current piece locks">queued <b>{v.garbageQueued}</b></span>}
           {v.stats.fallbacks > 0 && <span className="text-center">fallbacks <b className="text-zinc-300">{v.stats.fallbacks}</b></span>}
           {v.stats.missed > 0 && <span className="text-center" title="decided in time, but the lock delay ran out mid-move">missed <b className="text-zinc-300">{v.stats.missed}</b></span>}
           {v.stats.errors > 0 && <span className="text-center text-red-400">errors <b>{v.stats.errors}</b></span>}
