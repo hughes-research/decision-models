@@ -44,3 +44,6 @@ next-env.d.ts
 or-solver/.venv/
 __pycache__/
 .pytest_cache/
+
+# local agent permissions (personal, never commit)
+.claude/settings.local.json

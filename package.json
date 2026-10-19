@@ -3,7 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev -H 0.0.0.0 -p 3000",
+    "dev": "next dev -H 127.0.0.1 -p 3000",
+    "dev:lan": "next dev -H 0.0.0.0 -p 3000",
     "build": "next build",
     "start": "next start -H 0.0.0.0 -p 3000",
     "lint": "eslint",
@@ -11,7 +12,8 @@
     "bench": "node --no-warnings scripts/bench.ts",
     "solver": "uv run --directory or-solver uvicorn orsolver.server:app --host 127.0.0.1 --port 8100",
     "fixtures": "node --no-warnings scripts/fixtures.ts",
-    "test:solver": "npm run fixtures && uv run --directory or-solver pytest -q"
+    "test:solver": "npm run fixtures && uv run --directory or-solver pytest -q",
+    "demo": "next build && next start -H 0.0.0.0 -p 3000"
   },
   "dependencies": {
     "next": "16.4.2",
