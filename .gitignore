@@ -47,3 +47,6 @@ __pycache__/
 
 # local agent permissions (personal, never commit)
 .claude/settings.local.json
+
+# browser automation output
+.playwright-mcp/
